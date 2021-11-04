@@ -112,8 +112,8 @@
 									<div class="has-error" ng-show="instructions.$dirty">
 										<span ng-show="insName.instructions.$error.requiered">Must fill in instructions</span>
 									</div>
-									<button class="btn btn-primary" ng-click="ctrl.updateInstructions()" ng-disabled="!ctrl.currentRecipe.instruction">Submit Recipe Instructions</button>
-									
+									<button class="btn btn-primary" ng-click="ctrl.addInstructions()" ng-disabled="!ctrl.currentRecipe.name || !ctrl.currentRecipe.instruction">Submit Recipe Instructions</button>
+									<button type="button" ng-click="ctrl.removeInstructions()" class="btn btn-danger custom-width">Delete Instructions</button>
 								</div>
 						  </div>
 					 </div>
@@ -126,7 +126,7 @@
                   <table class="table table-hover table-striped table-bordered">
                   	  <thead class="thead-dark">
                           <tr>
-                              <th scope="col">ID.</th>
+                              <th scope="col">Id</th>
                               <th scope="col">Amount</th>
                               <th scope="col">Unit</th>
                               <th scope="col">Name</th>

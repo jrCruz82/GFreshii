@@ -42,14 +42,15 @@
 		</div>
 
 	</nav>
+		<div class="p-3 text-center bg-light">
+		    <h1 class="mb-3">Recipe Form</h1>
+		</div>
       <div class="generic-container">
           <div class="panel panel-default">
-              <div class="panel-heading" style="text-align:center"><span class="lead" >Recipe Form </span></div>
-              <br><hr><br>
               <div class="formcontainer ">
                   <form name="myForm" class="form-horizontal"  >
                       <input  type="hidden" ng-model="ctrl.currentRecipe.id" />
-                      <div class="row justify-content-center" align="center">
+                      <div class="row " align="center">
                           <div class="form-group col-md-12 " >
                               <label ng-hide="ctrl.recName" class="col-md-2 control-lable " for="rname">Recipe Name</label>
                               <div ng-hide="!ctrl.recName">
@@ -111,8 +112,8 @@
 									<div class="has-error" ng-show="instructions.$dirty">
 										<span ng-show="insName.instructions.$error.requiered">Must fill in instructions</span>
 									</div>
-									<button class="btn btn-primary" ng-click="ctrl.updateInstructions()" ng-disabled="!ctrl.currentRecipe.instruction">Submit Recipe Instructions</button>
-									
+									<button class="btn btn-primary" ng-click="ctrl.addInstructions()" ng-disabled="!ctrl.currentRecipe.name || !ctrl.currentRecipe.instruction">Submit Recipe Instructions</button>
+									<button type="button" ng-click="ctrl.removeInstructions()" class="btn btn-danger custom-width">Delete Instructions</button>
 								</div>
 						  </div>
 					 </div>
@@ -125,7 +126,7 @@
                   <table class="table table-hover table-striped table-bordered">
                   	  <thead class="thead-dark">
                           <tr>
-                              <th scope="col">ID.</th>
+                              <th scope="col">Id</th>
                               <th scope="col">Amount</th>
                               <th scope="col">Unit</th>
                               <th scope="col">Name</th>

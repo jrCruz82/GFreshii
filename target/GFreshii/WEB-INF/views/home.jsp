@@ -33,60 +33,39 @@
 		</nav>
 	</header>
 	<main>
-		<h1>Welcome to GFreshii</h1>
-		<h2>Enter your user information to get started</h2>
-		<div class="generic-container">
-    	<div class="panel panel-default">
-    		<div class="formcontainer">
-    			<form action="createUser" name="myForm" class="form-horizontal">
-	    			<div class="row">
-	                	<div class="form-group col-md-12">
-	    						<label class="col-md-2 control-lable">First Name: </label>
-								<div class="col-md-7">	
-									<input type="text" name="firstName" class="username form-control input-sm" placeholder="First Name" required>
-								</div>
-						</div>
-					</div>
-					<div class="row">
-						<div class="form-group col-md-12">		
-							<label class="col-md-2 control-lable">Last Name:  </label>
-							
-							<div class="col-md-7">
-								<input type="text" name="lastName" class="username form-control input-sm" placeholder="Last Name" required><br>
-							</div>
-						</div>
-					</div>
-					<div class="row">
-						<div class="form-group col-md-12">
-							<label class="col-md-2 control-lable">User Name: </label>
-							
-							<div class="col-md-7">
-								<input type="text" name="userName" class="username form-control input-sm" placeholder="Username" required><br>
-							</div>
-						</div>
-					</div>
-					<div class="row">
-						<div class="form-group col-md-12">
-							<label class="col-md-2 control-lable">Email: </label>
-							
-							<div class="col-md-7">
-								<input type="email" name="email" class="username form-control input-sm" placeholder="Email" required><br>
-							</div>
-							<div class="form-actions floatRight">
-								<input type="submit" class="btn btn-primary btn-sm">
-							</div>
-						</div>
-						
-	                    	
-						
-					</div>
-					
-					
-				</form>
-					
+		<div class="p-3 text-center bg-light">
+		    <h1 class="mb-3">Welcome to GFreshii</h1>
+		    <h4 class="mb-3">Enter your user information to get started</h4>
+		  </div>
+  			<form action="createUser" name="myForm" class="form-horizontal" method="post">
+   			<div class="form-row justify-content-center">
+   			    <div class="form-group col-md-4">
+			      <label for="inputName">First Name</label>
+			      <input type="text" name="firstName" class="form-control" id="inputName" placeholder="First Name" required>
+				</div>
 			</div>
-		</div>
-	</div>
+			<div class="form-row justify-content-center">
+			    <div class="form-group col-md-4">
+			      <label for="inputLastName">Last Name</label>
+			      <input type="text" name="lastName" class="form-control" id="inputLastName" placeholder="Last Name" required>
+			    </div>
+			</div>
+			  <div class="form-row justify-content-center">
+			  	<div class="form-group col-md-4">
+			    <label for="inputUserName">UserName</label>
+			    <input type="text" name="userName" class="form-control" id="inputUserName" placeholder="UserName" required>
+			  	</div>
+			  </div>
+			  <div class="form-row justify-content-center">
+			  	<div class="form-group col-md-4">
+			    <label for="inputEmail">Email</label>
+			    <input type="email" name="email" class="form-control" id="inputEmail" placeholder="Email" required>
+			  </div>
+			  </div>
+			  <div class="form-row justify-content-center">
+			    <button type="submit" class="btn btn-primary">Sign in</button>
+			  </div>
+		</form>
 	</main>
 	
 
