@@ -2,7 +2,7 @@
 	pageEncoding="UTF-8" isELIgnored="false"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -42,6 +42,7 @@
 		</div>
 
 	</nav>
+	<main>
 		<div class="p-3 text-center bg-light">
 		    <h1 class="mb-3">Recipe Form</h1>
 		</div>
@@ -60,7 +61,7 @@
 							  </div>
                               <div class="col-md-7 " align="center">
                                   <input  ng-hide="ctrl.recName" type="text" ng-model="ctrl.currentRecipe.name" id="rname" class="rname form-control input-sm" placeholder="Enter recipe name" required ng-minlength="3" />
-                                  <button ng-hide="ctrl.recName" ng-click="ctrl.createCurrentRecipeName()" ng-disabled="ctrl.recName" class="btn btn-primary">Add Name</button>
+                                  <button ng-hide="ctrl.recName" ng-click="ctrl.createCurrentRecipeName()" ng-disabled="ctrl.recName || !ctrl.currentRecipe.name" class="btn btn-primary">Add Name</button>
                                   
                                   <div class="has-error" ng-show="myForm.$dirty">
                                       <span ng-show="myForm.rname.$error.required">This is a required field</span>
@@ -105,14 +106,14 @@
                       <br>
                       <br>
                       <div class="row justify-content-center">
-						  <div class="form-outline">
+						  <div >
 							  <label class="form-label" for="instruction" style="vertical-align: top">Instructions</label>
 							  <textarea class="form-control" name="insName" id="instruction" rows="7" cols="145" placeholder="Enter cooking instructions" ng-model="ctrl.currentRecipe.instruction"></textarea>
 					  			<div>
 									<div class="has-error" ng-show="instructions.$dirty">
 										<span ng-show="insName.instructions.$error.requiered">Must fill in instructions</span>
 									</div>
-									<button class="btn btn-primary" ng-click="ctrl.addInstructions()" ng-disabled="!ctrl.currentRecipe.name || !ctrl.currentRecipe.instruction">Submit Recipe Instructions</button>
+									<button class="btn btn-primary" ng-click="ctrl.addInstructions()" ng-disabled="!ctrl.currentRecipe.name || !ctrl.currentRecipe.instruction">Submit/Edit Recipe Instructions</button>
 									<button type="button" ng-click="ctrl.removeInstructions()" class="btn btn-danger custom-width">Delete Instructions</button>
 								</div>
 						  </div>
@@ -130,7 +131,7 @@
                               <th scope="col">Amount</th>
                               <th scope="col">Unit</th>
                               <th scope="col">Name</th>
-                              <th scope="col"></th>
+                              <th scope="col">Edit/Remove</th>
                           </tr>
                       </thead>
                       <tbody>
@@ -149,7 +150,7 @@
               </div>
           </div>
       </div>
-
+	</main>
 
 
 	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
