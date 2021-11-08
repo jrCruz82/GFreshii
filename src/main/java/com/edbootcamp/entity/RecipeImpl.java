@@ -14,8 +14,6 @@ import javax.persistence.Table;
 import javax.validation.constraints.Size;
 
 import com.edbootcamp.api.entity.Recipe;
-import com.edbootcamp.view.IngredientViewImpl;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 
 //TODO Delete any JSON stuff that's only used for the UI

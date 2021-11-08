@@ -1,17 +1,18 @@
 package com.edbootcamp.api.manager;
 
 import java.util.List;
-import com.edbootcamp.view.RecipeViewImpl;
+
+import com.edbootcamp.api.entity.RecipeView;
 
 public interface RecipeManager{
 	
-	List<RecipeViewImpl> AllRecipes();
-	RecipeViewImpl saveRecipe(RecipeViewImpl recipe);
-	boolean isRecipeExist(RecipeViewImpl recipe);
-	RecipeViewImpl findById(Long id);
-	RecipeViewImpl updateRecipe(RecipeViewImpl currentRecipe);
+	List<RecipeView> AllRecipes();
+	RecipeView saveRecipe(RecipeView recipe);
+	Boolean isRecipeExist(RecipeView recipe);
+	RecipeView findById(Long id);
+	RecipeView updateRecipe(RecipeView currentRecipe);
 	void deleteRecipeById(Long id);
-	RecipeViewImpl addInstruction(Long id, RecipeViewImpl recipe);
+	RecipeView addInstruction(Long id, RecipeView recipe);
 	void deleteRecipeInstructionById(Long id);
 	
 }

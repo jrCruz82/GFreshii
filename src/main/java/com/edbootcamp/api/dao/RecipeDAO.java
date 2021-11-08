@@ -1,18 +1,19 @@
 package com.edbootcamp.api.dao;
 
 import java.util.List;
-import com.edbootcamp.entity.RecipeImpl;
+
+import com.edbootcamp.api.entity.Recipe;
 
 public interface RecipeDAO {
 
-	List<RecipeImpl> allRecipes();
-	RecipeImpl saveRecipe(RecipeImpl recipe);
-	boolean isRecipeExist(RecipeImpl recipe);
-	RecipeImpl findById(Long long1);
-	RecipeImpl updateRecipe(RecipeImpl currentRecipe);
+	List<Recipe> allRecipes();
+	Recipe saveRecipe(Recipe recipe);
+	Boolean isRecipeExist(Recipe recipe);
+	Recipe findById(Long long1);
+	Recipe updateRecipe(Recipe currentRecipe);
 	void deleteRecipeById(Long id);
-	RecipeImpl getIngredientsById(RecipeImpl recipe);
-	RecipeImpl addInstruction(Long id, RecipeImpl impl);
+	Recipe getIngredientsById(Recipe recipe);
+	Recipe addInstruction(Long id, Recipe impl);
 	void deleteRecipeInstructionById(Long id);
 	
 }

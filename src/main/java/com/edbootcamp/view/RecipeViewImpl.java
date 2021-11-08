@@ -3,16 +3,18 @@ package com.edbootcamp.view;
 import java.util.List;
 
 import com.edbootcamp.api.entity.RecipeView;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 //TODO Delete all the Hibernates stuff,  add JSON annotations as needed for the UI
 
 public class RecipeViewImpl implements RecipeView {
-
+	@JsonProperty
 	private Long id;
+	@JsonProperty
 	private String name;
+	@JsonProperty
 	private String instruction;	
-	
-	
+	@JsonProperty
 	private List<IngredientViewImpl> ingredients;
 
 	public Long getId() {

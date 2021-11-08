@@ -2,14 +2,14 @@ package com.edbootcamp.api.dao;
 
 import java.util.List;
 
-import com.edbootcamp.entity.IngredientImpl;
+import com.edbootcamp.api.entity.Ingredient;
 
 public interface IngredientDAO {
 
-	List<IngredientImpl> allIngredients(Long id);
-	IngredientImpl saveIngredient(Long id, IngredientImpl ingredient);
-	void deleteIngredient(Long id,IngredientImpl ingredient);
-	IngredientImpl findByName(String name, Long id);
-	IngredientImpl updateIngredient(Long id, IngredientImpl impl);
-	IngredientImpl findById(Long id);
+	List<Ingredient> allIngredients(Long id);
+	Ingredient saveIngredient(Long id, Ingredient ingredient);
+	void deleteIngredient(Long id,Ingredient ingredient);
+	Ingredient findByName(String name, Long id);
+	Ingredient updateIngredient(Long id, Ingredient impl);
+	Ingredient findById(Long id);
 }

@@ -10,7 +10,6 @@ import org.springframework.stereotype.Service;
 import com.edbootcamp.api.dao.RecipeDAO;
 import com.edbootcamp.api.entity.Recipe;
 import com.edbootcamp.api.service.RecipeService;
-import com.edbootcamp.entity.RecipeImpl;
 
 
 @Service("recipeService")
@@ -21,22 +20,22 @@ public class RecipeServiceImpl implements RecipeService{
 	
 	@Transactional
 	@Override
-	public List<RecipeImpl> fetchAllRecipes(){
+	public List<Recipe> fetchAllRecipes(){
 		return dao.allRecipes();
 	}
 
 	@Override
-	public RecipeImpl saveRecipe(RecipeImpl recipe) {
+	public Recipe saveRecipe(Recipe recipe) {
 		return dao.saveRecipe(recipe);
 	}
 
 	@Override
-	public RecipeImpl findById(Long id) {
+	public Recipe findById(Long id) {
 		return dao.findById(id);
 	}
 
 	@Override
-	public RecipeImpl updateRecipe(RecipeImpl currentRecipe) {
+	public Recipe updateRecipe(Recipe currentRecipe) {
 		return dao.updateRecipe(currentRecipe);
 	}
 
@@ -46,17 +45,17 @@ public class RecipeServiceImpl implements RecipeService{
 	}
 
 	@Override
-	public boolean isRecipeExist(RecipeImpl recipe) {
+	public Boolean isRecipeExist(Recipe recipe) {
 		return dao.isRecipeExist(recipe);
 	}
 
 	@Override
-	public RecipeImpl getIngredientsById(RecipeImpl recipe) {
+	public Recipe getIngredientsById(Recipe recipe) {
 		return dao.getIngredientsById(recipe);
 	}
 
 	@Override
-	public RecipeImpl addInstruction(Long id, RecipeImpl impl) {
+	public Recipe addInstruction(Long id, Recipe impl) {
 		return dao.addInstruction(id, impl);
 	}
 

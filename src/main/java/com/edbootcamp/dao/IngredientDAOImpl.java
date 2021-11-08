@@ -15,11 +15,11 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 import com.edbootcamp.api.dao.IngredientDAO;
+import com.edbootcamp.api.entity.Ingredient;
 import com.edbootcamp.api.entity.Recipe;
 import com.edbootcamp.api.manager.RecipeManager;
 import com.edbootcamp.entity.IngredientImpl;
 import com.edbootcamp.entity.RecipeImpl;
-import com.edbootcamp.view.RecipeViewImpl;
 
 @Repository
 @EnableTransactionManagement
@@ -36,46 +36,48 @@ public class IngredientDAOImpl implements IngredientDAO{
 	RecipeManager recipeManager;
 	
 	@Override
-	public List<IngredientImpl> allIngredients(Long id) {
+	public List<Ingredient> allIngredients(Long id) {
 		Session session = sessionFactory.getCurrentSession();
 		Query query = session.createQuery("from IngredientImpl where recipeID=:id");
 		query.setParameter("id", id);
-		List<IngredientImpl> list = query.list();
+		@SuppressWarnings("unchecked")
+		List<Ingredient> list = query.list();
 		return list;
 	}
 
 	@Override
-	public IngredientImpl saveIngredient(Long id, IngredientImpl ingredient) {
-		RecipeImpl impl = hibernateTemplate.load(RecipeImpl.class, id);		
-		ingredient.setRecipe( impl);
+	public Ingredient saveIngredient(Long id, Ingredient ingredient) {
+		Recipe impl = hibernateTemplate.load(RecipeImpl.class, id);		
+		ingredient.setRecipe( (RecipeImpl) impl);
 		hibernateTemplate.persist(ingredient);
 		return ingredient;
 	}
 
 
 	@Override
-	public void deleteIngredient(Long id, IngredientImpl ingredient ) {
+	public void deleteIngredient(Long id, Ingredient ingredient ) {
 		Session session = sessionFactory.getCurrentSession();
 		Query query = session.createQuery("Delete FROM IngredientImpl i WHERE i.id=:id").setLong("id", ingredient.getId());
 		query.executeUpdate();
 	}
 
 	@Override
-	public IngredientImpl findByName(String name, Long id) {
+	public Ingredient findByName(String name, Long id) {
 		Session session = sessionFactory.getCurrentSession();
 		SQLQuery query = session.createSQLQuery("select * from INGREDIENT as i where i.NAME = :name and i.recipeID=:id");
 		query.addEntity(IngredientImpl.class);
 		query.setParameter("name",name);
 		query.setLong("id",id);
 		query.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY);
+		@SuppressWarnings("unchecked")
 		List<IngredientImpl> list =  query.list();
-		IngredientImpl ingredientImpl = list.get(0);
+		Ingredient ingredientImpl = list.get(0);
 		return ingredientImpl;
 	}
 
 	@Override
-	public IngredientImpl updateIngredient(Long id, IngredientImpl impl) {
-		IngredientImpl ingredientImpl = hibernateTemplate.load(IngredientImpl.class, impl.getId());
+	public Ingredient updateIngredient(Long id, Ingredient impl) {
+		Ingredient ingredientImpl = hibernateTemplate.load(IngredientImpl.class, impl.getId());
 		ingredientImpl.setAmount(impl.getAmount());
 		ingredientImpl.setName(impl.getName());
 		ingredientImpl.setUnit(impl.getUnit());
@@ -84,10 +86,10 @@ public class IngredientDAOImpl implements IngredientDAO{
 	}
 
 	@Override
-	public IngredientImpl findById(Long id) {
+	public Ingredient findById(Long id) {
 		Session session = sessionFactory.getCurrentSession();
 		Query query = session.createQuery("FROM IngredientImpl i WHERE i.id=:id").setLong("id", id);
-		return (IngredientImpl) query.uniqueResult();
+		return (Ingredient) query.uniqueResult();
 	}
 
 

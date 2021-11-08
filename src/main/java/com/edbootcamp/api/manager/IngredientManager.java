@@ -2,14 +2,15 @@ package com.edbootcamp.api.manager;
 
 import java.util.List;
 
-import com.edbootcamp.view.IngredientViewImpl;
+import com.edbootcamp.api.entity.IngredientView;
+
 
 public interface IngredientManager {
 
-	List<IngredientViewImpl> allIngredientsByRecipe(Long id);
-	IngredientViewImpl saveIngredient(Long id, IngredientViewImpl ingredient);
-	void deleteIngredientById(Long id, IngredientViewImpl ingredient);
-	IngredientViewImpl findByName(String name, Long id);
-	IngredientViewImpl updateIngredientById(Long id, IngredientViewImpl ingredient);
-	IngredientViewImpl findById(Long id);
+	List<IngredientView> allIngredientsByRecipe(Long id);
+	IngredientView saveIngredient(Long id, IngredientView ingredient);
+	void deleteIngredientById(Long id, IngredientView ingredient);
+	IngredientView findByName(String name, Long id);
+	IngredientView updateIngredientById(Long id, IngredientView ingredient);
+	IngredientView findById(Long id);
 }

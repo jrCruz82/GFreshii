@@ -15,7 +15,7 @@
 
 <body ng-app="RecipeListApp" class="ng-cloak" ng-controller="recipeController as ctrl">
 	
-	<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+	<nav class="navbar navbar-expand-lg navbar-dark bg-dark ">
 		<a class="navbar-brand" href="#">GFreshii App</a>
 		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
 			<span class="navbar-toggler-icon"></span>
@@ -31,11 +31,10 @@
 				<li class="nav-item active">
 					<a class="nav-link " href="groceries">Grocery List</a>
 				</li>
-			    <li class="nav-item dropdown">
-			    	
-			    	<button class="btn btn-default dropdown-toggle dropdown-toggle-split " type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">Edit Recipe<span class="caret"></span></button>
-			       	<ul class="dropdown-menu" aria-labelledby="dropdownMenu1" ng-hide="!ctrl.recipeNames">
-            			<li ng-repeat="name in ctrl.recipeNames track by $index "><a class="dropdown-item" type="button" ng-click="ctrl.loadRecipe($index)">{{name}}</a></li>
+			    <li class="nav-item dropdown ">
+			    	<button class="btn btn-secondary dropdown-toggle " type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">Edit Recipe<span class="caret"></span></button>
+			       	<ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="dropdownMenu1" ng-hide="!ctrl.recipeNames">
+            			<li ng-repeat="name in ctrl.recipeNames track by $index "><a class="dropdown-item " type="button" ng-click="ctrl.loadRecipe($index)">{{name}}</a></li>
             		</ul>
 			    </li>
 			</ul>
@@ -59,9 +58,9 @@
 								<button type="button" class="btn btn-danger" ng-click="ctrl.removeRecipe()" >Delete Recipe</button>
 								<button type="button" class="btn btn-secondary" ng-click="ctrl.updateRecipeName()" >Edit Recipe Name</button>
 							  </div>
-                              <div class="col-md-7 " align="center">
-                                  <input  ng-hide="ctrl.recName" type="text" ng-model="ctrl.currentRecipe.name" id="rname" class="rname form-control input-sm" placeholder="Enter recipe name" required ng-minlength="3" />
-                                  <button ng-hide="ctrl.recName" ng-click="ctrl.createCurrentRecipeName()" ng-disabled="ctrl.recName || !ctrl.currentRecipe.name" class="btn btn-primary">Add Name</button>
+                              <div class="col-md-7 shadow-lg bg-white rounded" align="center">
+                                  <input  ng-hide="ctrl.recName" type="text" ng-model="ctrl.currentRecipe.name" id="rname" class="rname form-control " placeholder="Enter recipe name" required ng-minlength="3" />
+                                  <button ng-hide="ctrl.recName" ng-click="ctrl.createCurrentRecipeName()" ng-disabled="ctrl.recName || !ctrl.currentRecipe.name" class="btn btn-primary hover-shadow">Add Name</button>
                                   
                                   <div class="has-error" ng-show="myForm.$dirty">
                                       <span ng-show="myForm.rname.$error.required">This is a required field</span>

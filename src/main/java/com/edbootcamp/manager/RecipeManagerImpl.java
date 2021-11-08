@@ -7,6 +7,8 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.edbootcamp.api.entity.Recipe;
+import com.edbootcamp.api.entity.RecipeView;
 import com.edbootcamp.api.manager.RecipeManager;
 import com.edbootcamp.api.service.RecipeService;
 import com.edbootcamp.entity.RecipeImpl;
@@ -20,53 +22,53 @@ public class RecipeManagerImpl implements RecipeManager{
 	@Autowired
 	private RecipeService recipeService;
 	
-	public List<RecipeViewImpl> AllRecipes(){
-		List<RecipeImpl> list = recipeService.fetchAllRecipes();
-		List<RecipeViewImpl> viewList = new ArrayList<>();
-		for(RecipeImpl recipeImpl: list) {
-			RecipeViewImpl viewObjRecipeView = new RecipeViewImpl();
+	public List<RecipeView> AllRecipes(){
+		List<Recipe> list = recipeService.fetchAllRecipes();
+		List<RecipeView> viewList = new ArrayList<>();
+		for(Recipe recipeImpl: list) {
+			RecipeView viewObjRecipeView = new RecipeViewImpl();
 			BeanUtils.copyProperties(recipeImpl, viewObjRecipeView);
 			viewList.add(viewObjRecipeView);
 		}
 		return viewList;
 	}
 
-	protected RecipeViewImpl convertToView(RecipeImpl recipe) {
-		RecipeViewImpl view = new RecipeViewImpl();
+	protected RecipeView convertToView(Recipe recipe) {
+		RecipeView view = new RecipeViewImpl();
 		BeanUtils.copyProperties(recipe, view);
 		return  view;
 	}
 	
-	protected RecipeImpl convertToImpl(RecipeViewImpl recipe) {
-		RecipeImpl impl = new RecipeImpl();
+	protected Recipe convertToImpl(RecipeView recipe) {
+		Recipe impl = new RecipeImpl();
 		BeanUtils.copyProperties(recipe, impl);
 		return impl;
 	}
 	
-	public RecipeViewImpl saveRecipe(RecipeViewImpl recipe) {
-		RecipeImpl impl = convertToImpl(recipe);
+	public RecipeView saveRecipe(RecipeView recipe) {
+		Recipe recipeImpl = convertToImpl(recipe);
 		//load the impl with the view and then send to the service
-		RecipeImpl savedIpmlImpl =  recipeService.saveRecipe(impl);
-		RecipeViewImpl viewToReturn = convertToView(savedIpmlImpl);
+		Recipe savedIpmlImpl =  recipeService.saveRecipe(recipeImpl);
+		RecipeView viewToReturn = convertToView(savedIpmlImpl);
 		//create the view from the impl
 		return viewToReturn;
 	} 
 	
-	public boolean isRecipeExist(RecipeViewImpl recipe) {
-		RecipeImpl impl = convertToImpl(recipe);
+	public Boolean isRecipeExist(RecipeView recipe) {
+		Recipe impl = convertToImpl(recipe);
 		return recipeService.isRecipeExist(impl);
 	}
 	
-	public RecipeViewImpl findById(Long id) {
-		RecipeImpl foundImpl = recipeService.findById(id);
-		RecipeViewImpl viewRecipe = convertToView(foundImpl);
+	public RecipeView findById(Long id) {
+		Recipe foundImpl = recipeService.findById(id);
+		RecipeView viewRecipe = convertToView(foundImpl);
 		return viewRecipe;
 	}
 	
-	public RecipeViewImpl updateRecipe(RecipeViewImpl currentRecipe) {
-		RecipeImpl impl = convertToImpl(currentRecipe);
-		RecipeImpl updatedImpl = recipeService.updateRecipe(impl);
-		RecipeViewImpl recipeView = convertToView(updatedImpl);
+	public RecipeView updateRecipe(RecipeView currentRecipe) {
+		Recipe impl = convertToImpl(currentRecipe);
+		Recipe updatedImpl = recipeService.updateRecipe(impl);
+		RecipeView recipeView = convertToView(updatedImpl);
 		return recipeView;
 	}
 	
@@ -74,14 +76,14 @@ public class RecipeManagerImpl implements RecipeManager{
 		recipeService.deleteRecipeById(id);
 	}
 
-	public RecipeImpl getIngredientsById(RecipeImpl recipe) {
+	public Recipe getIngredientsById(Recipe recipe) {
 		return recipeService.getIngredientsById(recipe);
 	}
 
-	public RecipeViewImpl addInstruction(Long id, RecipeViewImpl recipe) {
-		RecipeImpl impl = convertToImpl(recipe);
-		RecipeImpl updatedImpl = recipeService.addInstruction(id,impl);
-		RecipeViewImpl recipeView = convertToView(updatedImpl);
+	public RecipeView addInstruction(Long id, RecipeView recipe) {
+		Recipe impl = convertToImpl(recipe);
+		Recipe updatedImpl = recipeService.addInstruction(id,impl);
+		RecipeView recipeView = convertToView(updatedImpl);
 		return recipeView;
 	}
 
@@ -89,5 +91,6 @@ public class RecipeManagerImpl implements RecipeManager{
 	public void deleteRecipeInstructionById(Long id) {
 		recipeService.deleteRecipeInstructionById(id);
 	}
+
 	
 }

@@ -8,7 +8,6 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.json.simple.JSONObject;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -18,6 +17,7 @@ import org.springframework.web.servlet.ModelAndView;
 @Controller
 public class AddUserController {
 
+	@SuppressWarnings("unchecked")
 	@RequestMapping(value = "/createUser", method = RequestMethod.POST)
 	public ModelAndView addUser(@RequestParam("firstName") String firstName,
 								@RequestParam("lastName") String lastName,

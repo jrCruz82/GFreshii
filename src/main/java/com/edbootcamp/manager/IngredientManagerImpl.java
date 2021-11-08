@@ -8,11 +8,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.edbootcamp.api.entity.Ingredient;
-import com.edbootcamp.api.entity.RecipeView;
+import com.edbootcamp.api.entity.IngredientView;
+import com.edbootcamp.api.entity.Recipe;
 import com.edbootcamp.api.manager.IngredientManager;
 import com.edbootcamp.api.service.IngredientService;
 import com.edbootcamp.entity.IngredientImpl;
-import com.edbootcamp.entity.RecipeImpl;
 import com.edbootcamp.view.RecipeViewImpl;
 import com.edbootcamp.view.IngredientViewImpl;
 
@@ -24,28 +24,28 @@ public class IngredientManagerImpl implements IngredientManager{
 	@Autowired
 	private RecipeManagerImpl recipeManager;
 	
-	private IngredientViewImpl convertToView(IngredientImpl ingredient) {
-		IngredientViewImpl viewimpl = new IngredientViewImpl();
+	private IngredientView convertToView(Ingredient ingredient) {
+		IngredientView viewimpl = new IngredientViewImpl();
 		BeanUtils.copyProperties(ingredient, viewimpl);
 		return  viewimpl;
 	}
 	
-	private IngredientImpl convertToImpl(IngredientViewImpl ingredient) {
+	private Ingredient convertToImpl(IngredientView ingredient) {
 		IngredientImpl impl = new IngredientImpl();
 		BeanUtils.copyProperties(ingredient,impl);
 		return  impl;
 	}
 	
-	public RecipeImpl getRecipe(RecipeViewImpl recipeView) {
-		RecipeImpl impl = recipeManager.convertToImpl(recipeView);
+	public Recipe getRecipe(RecipeViewImpl recipeView) {
+		Recipe impl = recipeManager.convertToImpl(recipeView);
 		return impl;
 	}
 	
-	public List<IngredientViewImpl> allIngredientsByRecipe(Long id) {
-		List<IngredientImpl> list = ingredientService.fetchAllIngredientsByRecipe(id);
-		List<IngredientViewImpl> viewList = new ArrayList<IngredientViewImpl>();
-		for(IngredientImpl ingredientImpl: list) {
-			IngredientViewImpl viewObjRecipeView = new IngredientViewImpl();
+	public List<IngredientView> allIngredientsByRecipe(Long id) {
+		List<Ingredient> list = ingredientService.fetchAllIngredientsByRecipe(id);
+		List<IngredientView> viewList = new ArrayList<IngredientView>();
+		for(Ingredient ingredientImpl: list) {
+			IngredientView viewObjRecipeView = new IngredientViewImpl();
 			BeanUtils.copyProperties(ingredientImpl, viewObjRecipeView);
 			viewList.add(viewObjRecipeView);
 		}
@@ -53,41 +53,41 @@ public class IngredientManagerImpl implements IngredientManager{
 	}
 
 	
-	public IngredientViewImpl saveIngredient(Long id, IngredientViewImpl ingredient) {
-		IngredientImpl impl = new IngredientImpl();
+	public IngredientView saveIngredient(Long id, IngredientView ingredient) {
+		Ingredient impl = new IngredientImpl();
 		BeanUtils.copyProperties(ingredient, impl);
-		IngredientImpl savedIngredient =  ingredientService.saveIngredient(id,impl);
-		IngredientViewImpl viewIngredient = new IngredientViewImpl();
+		Ingredient savedIngredient =  ingredientService.saveIngredient(id,impl);
+		IngredientView viewIngredient = new IngredientViewImpl();
 		viewIngredient = convertToView(savedIngredient);
 		return viewIngredient;
 	}
 
 	@Override
-	public IngredientViewImpl findByName(String name, Long id) {
+	public IngredientView findByName(String name, Long id) {
 		Ingredient ingredient = ingredientService.findByName(name, id);
-		IngredientViewImpl ingredientView = new IngredientViewImpl();
+		IngredientView ingredientView = new IngredientViewImpl();
 		BeanUtils.copyProperties(ingredient, ingredientView);
 		return ingredientView;
 	}
 
 	@Override
-	public void deleteIngredientById(Long id,IngredientViewImpl ingredient) {
-		IngredientImpl impl = new IngredientImpl();
+	public void deleteIngredientById(Long id,IngredientView ingredient) {
+		Ingredient impl = new IngredientImpl();
 		BeanUtils.copyProperties(ingredient, impl);
 		ingredientService.deleteIngredient(id, impl);
 	}
 
 	@Override
-	public IngredientViewImpl updateIngredientById(Long id, IngredientViewImpl ingredient) {
-		IngredientImpl impl = convertToImpl(ingredient);
+	public IngredientView updateIngredientById(Long id, IngredientView ingredient) {
+		Ingredient impl = convertToImpl(ingredient);
 		impl = ingredientService.updateIngredient(id, impl);
 		ingredient = convertToView(impl);
 		return ingredient;
 	}
 
 	@Override
-	public IngredientViewImpl findById(Long id) {
-		IngredientImpl impl = new IngredientImpl();
+	public IngredientView findById(Long id) {
+		Ingredient impl = new IngredientImpl();
 		impl = ingredientService.findById(id);
 		return convertToView(impl);
 	}

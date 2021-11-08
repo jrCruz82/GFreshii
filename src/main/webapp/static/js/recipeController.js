@@ -87,10 +87,16 @@ angular.module('RecipeListApp').controller('recipeController', ['$scope', '$log'
 		recipeService.createRecipe(self.currentRecipe).then(function(data){
 			self.currentRecipe = data;
 			self.currentIndex = self.currentRecipe["id"];
-			self.allRecipes 
+			self.allRecipes();
 			self.loadIngredients(self.currentIndex);
 		} , function(errResponse){
-			$log.error('Error while creating recipe');
+			if(errResponse.status===409){
+				$log.error('Error: Recipe with that name already exists.');
+				self.resetRecipe();
+			}else{
+				$log.error('Error while creating recipe');
+			}
+			
 		});
 	}
 
@@ -154,7 +160,6 @@ angular.module('RecipeListApp').controller('recipeController', ['$scope', '$log'
 			return;
 		}
 		self.recName = angular.copy(self.currentRecipe.name);
-		$log.log(self.currentRecipe.name + " creating name");
 		document.getElementById("amount").focus();
 		self.createRecipe(self.currentRecipe);
 	}

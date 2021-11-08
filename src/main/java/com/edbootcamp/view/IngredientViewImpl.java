@@ -1,16 +1,18 @@
 package com.edbootcamp.view;
 
 import com.edbootcamp.api.entity.IngredientView;
-import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class IngredientViewImpl implements IngredientView{
-
+	@JsonProperty
 	private Long id;
+	@JsonProperty
 	private String name;
+	@JsonProperty
 	private String amount;
+	@JsonProperty
 	private String unit;
-	
-	
+	@JsonProperty
 	private RecipeViewImpl recipeId;
 	
 	public Long getId() {
