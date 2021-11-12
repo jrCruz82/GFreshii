@@ -97,6 +97,7 @@ public class RecipeController {
     @RequestMapping(value = "/recipes/addInstruction/{id}", method = RequestMethod.PUT)
     public ResponseEntity<Recipe> addInstruction(@PathVariable("id") Long id ,@RequestBody RecipeImpl recipe) {
     	Recipe recipeV = dao.findById(id);
+    	LOGGER.info("Adding instructions to recipe " + recipe.getName());
         if (recipeV == null) {
         	LOGGER.error("Unable to add instruction. Recipe with id " + id + " not found");
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
