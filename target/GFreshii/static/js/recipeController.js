@@ -21,10 +21,8 @@ angular.module('RecipeListApp').controller('recipeController', ['$scope', '$log'
 	self.allRecipes = function(){
 		recipeService.allRecipes().then(function(data){
 			self.recipes = data;
-			
 		self.recipeNames = [];
 		for(let i =0;i<self.recipes.length;i++){
-			//$log.log(self.recipes[i].name);
 			self.recipeNames.push(self.recipes[i].name);
 		}	
 		}, function(errResponse){
@@ -50,25 +48,21 @@ angular.module('RecipeListApp').controller('recipeController', ['$scope', '$log'
 				self.currentIndex = self.recipes[i].id;
 				$log.log(self.currentIndex);		
 			}
-			
 		}
 		self.resetRecipe();
 		self.deleteRecipe(self.currentIndex);
 	}
 	
 	self.updateRecipe =  function (currentRecipe, id){
-        recipeService.updateRecipe(currentRecipe, id)
-            .then(
-            self.allRecipes,
-            function(errResponse){
+        recipeService.updateRecipe(currentRecipe, id).then(
+            self.allRecipes, function(errResponse){
                 $log.error('Error while updating Recipe');
             }
         );
     }
 
 	self.addInstruction =  function (currentRecipe, id){
-        recipeService.addInstruction(currentRecipe, id)
-            .then(function(data){
+        recipeService.addInstruction(currentRecipe, id).then(function(data){
 			$log.log(data);
 			},
             function(errResponse){
@@ -93,39 +87,39 @@ angular.module('RecipeListApp').controller('recipeController', ['$scope', '$log'
 		recipeService.createRecipe(self.currentRecipe).then(function(data){
 			self.currentRecipe = data;
 			self.currentIndex = self.currentRecipe["id"];
-			self.allRecipes 
+			self.allRecipes();
 			self.loadIngredients(self.currentIndex);
 		} , function(errResponse){
-			$log.error('Error while creating recipe');
+			if(errResponse.status===409){
+				$log.error('Error: Recipe with that name already exists.');
+				self.resetRecipe();
+			}else{
+				$log.error('Error while creating recipe');
+			}
+			
 		});
-
 	}
 
 	self.addIngredient = function(){
 		recipeService.addIngredient(self.ingredients,self.currentIndex).then(function(data){
 			$log.log(data);
-			
 			$log.log(' data from adding ingredient');
 			self.loadIngredients(self.currentIndex);
 		},
 			function(errResponse){
 			$log.error('Error while adding Ingredient');
 		});
-		
 	}
 	
 	self.updateIngredient = function(){
 		recipeService.updateIngredient(self.ingredients,self.currentIndex).then(function(data){
 			$log.log(data);
-			
-			
 			$log.log(' data from adding ingredient');
 			self.loadIngredients(self.currentIndex);
 		},
 			function(errResponse){
 			$log.error('Error while adding Ingredient');
 		});
-		
 	}
 	
 	self.deleteIngredient = function(){
@@ -166,7 +160,6 @@ angular.module('RecipeListApp').controller('recipeController', ['$scope', '$log'
 			return;
 		}
 		self.recName = angular.copy(self.currentRecipe.name);
-		$log.log(self.currentRecipe.name + " creating name");
 		document.getElementById("amount").focus();
 		self.createRecipe(self.currentRecipe);
 	}
@@ -191,13 +184,11 @@ angular.module('RecipeListApp').controller('recipeController', ['$scope', '$log'
 					$log.log(self.currentRecipe.ingredients[i]);
 				}
 			}
-			
 			self.updateIngredient(self.currentRecipe, self.currentIndex);
 			self.ingredients = {};
 			self.allRecipes();
 			return;
 		}
-		
 		if(self.currentRecipe.ingredients === null || self.currentRecipe.ingredients === undefined){
 			self.currentRecipe.ingredients = angular.copy(self.ingredients);
 		}else{
@@ -205,31 +196,24 @@ angular.module('RecipeListApp').controller('recipeController', ['$scope', '$log'
 		}
 		$log.log(self.currentRecipe.ingredients);
 		$log.log('Recipe updated with id ', self.currentIndex);
-
-		$log.log(self.ingredients);
-
 		$log.log(self.currentIndex + " recipe id");
 		$log.log(self.ingredients);
 		self.addIngredient(self.ingredients, self.currentIndex);
 		self.loadIngredients(self.currentIndex);
 		self.ingredients = {};
-		
 		document.getElementById("amount").focus();
-		
     }
 
 	self.removeInstructions = function() {
 		$log.log(self.currentRecipe);
 		self.deleteInstruction(self.currentIndex);
 		self.currentRecipe.instruction = "";
-		//self.loadRecipe(self.currentIndex-1);
 	};
 	self.addInstructions = function(){
 		self.isDisabled = false;
 		if(self.currentRecipe === undefined){
 			$log.error('Must enter Recipe name first');
 			return;
-
 		}
 		self.addInstruction(self.currentRecipe, self.currentIndex);
 		$log.log(self.currentRecipe.instruction);
@@ -240,12 +224,10 @@ angular.module('RecipeListApp').controller('recipeController', ['$scope', '$log'
 		self.allRecipes();
 		self.currentIndex = self.recipes[index].id;
 		$log.log(self.currentIndex+' on loadRecipe');
-		
 		self.currentRecipe = angular.copy(self.recipes[index]);
 		$log.log(self.currentRecipe.instruction);
 		try{
 			self.currentIngredientId = self.currentRecipe.ingredients[self.currentRecipe.ingredients.length-1].id;
-			
 		}catch(e){
 			self.currentIngredientId=1;
 		}
@@ -266,7 +248,6 @@ angular.module('RecipeListApp').controller('recipeController', ['$scope', '$log'
         $log.log('id to be edited', id);
         for(let i = 0; i < self.currentRecipe.ingredients.length; i++){
             if(self.currentRecipe.ingredients[i].id === id) {
-				
                 self.ingredients = angular.copy(self.currentRecipe.ingredients[i]);
                 break;
             }

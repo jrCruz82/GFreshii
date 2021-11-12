@@ -23,16 +23,11 @@ angular.module('RecipeListApp').factory('recipeService', ['$http','$q','$log', f
 	function allRecipes() {
 		let deferred = $q.defer();
 		$http.get(REST_SERVICE_URI).then(function(response){
-			
 			deferred.resolve(response.data);
-
 		}, function(errResponse){
 			$log.error('Error while fetching Recipes...');
-			
 			deferred.reject(errResponse);
 		});
-		
-		
 		return deferred.promise;
 	}
 	

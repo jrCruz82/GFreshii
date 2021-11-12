@@ -19,16 +19,22 @@ import com.edbootcamp.view.RecipeViewImpl;
 
 
 
+
 @RestController
 public class RecipeController {
 
 	private static Logger LOGGER = LoggerFactory.getLogger(RecipeController.class);
+
 	@Autowired
 	RecipeManager recipeManager;
 	
 	@RequestMapping(value = "/recipes/", method = RequestMethod.GET)
     public ResponseEntity<List<?>> findAllRecipes() {
         List<RecipeView> recipes =  recipeManager.AllRecipes();
+        for(RecipeView recipe: recipes) {
+        	LOGGER.info("Recipes available so far: {}", recipe.getName());
+        }
+        
         if(recipes.isEmpty()){
             return new ResponseEntity<List<?>>(HttpStatus.NO_CONTENT);
         }

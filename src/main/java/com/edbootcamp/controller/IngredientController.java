@@ -2,6 +2,8 @@ package com.edbootcamp.controller;
 
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -18,14 +20,17 @@ import com.edbootcamp.view.IngredientViewImpl;
 @RestController
 public class IngredientController {
 
+	private static Logger LOGGER = LoggerFactory.getLogger("IngredientController");
 	@Autowired
 	private IngredientManager ingredientManager;
 	
 	@RequestMapping(value = "/recipes/ingredientsByRecipe/{id}", method = RequestMethod.GET)
     public ResponseEntity<List<IngredientView>> getAllIngredientsByRecipeId(@PathVariable ("id") Long id) {
-        List<IngredientView> ingredients = ingredientManager.allIngredientsByRecipe(id);
-        for(IngredientView list: ingredients) {
-        	System.out.println(list.getName());
+        
+		List<IngredientView> ingredients = ingredientManager.allIngredientsByRecipe(id);
+        
+		for(IngredientView list: ingredients) {
+        	LOGGER.info("Recipe ingredients for recipe Id:{} ",list.getName() );
         }
 		return new ResponseEntity<List<IngredientView>>(ingredients, HttpStatus.OK);
     }
