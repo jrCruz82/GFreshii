@@ -1,0 +1,17 @@
+com\edbootcamp\serviceController\IngredientController.class
+com\edbootcamp\api\dao\RecipeDAO.class
+com\edbootcamp\configuration\HibernateConfig.class
+com\edbootcamp\api\service\IngredientService.class
+com\edbootcamp\configuration\SpringMvcConfiguration.class
+com\edbootcamp\api\entity\Recipe.class
+com\edbootcamp\api\entity\Ingredient.class
+com\edbootcamp\configuration\WebServletConfiguration.class
+com\edbootcamp\dao\RecipeDAOImpl.class
+com\edbootcamp\service\RecipeServiceImpl.class
+com\edbootcamp\service\IngredientServiceImpl.class
+com\edbootcamp\api\dao\IngredientDAO.class
+com\edbootcamp\api\service\RecipeService.class
+com\edbootcamp\dao\IngredientDAOImpl.class
+com\edbootcamp\serviceController\RecipeController.class
+com\edbootcamp\entity\IngredientImpl.class
+com\edbootcamp\entity\RecipeImpl.class
