@@ -10,7 +10,6 @@ com\edbootcamp\view\RecipeViewImpl.class
 com\edbootcamp\configuration\HttpClientConfig.class
 com\edbootcamp\configuration\HttpClientConfig$1.class
 com\edbootcamp\api\views\IngredientView.class
-com\edbootcamp\configuration\HttpClientConfig$2.class
 com\edbootcamp\configuration\RestTemplateConfig.class
 com\edbootcamp\restManagers\RESTIngredientManagerImpl.class
 com\edbootcamp\controller\IndexController.class

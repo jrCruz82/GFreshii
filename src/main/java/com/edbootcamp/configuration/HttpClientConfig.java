@@ -100,25 +100,25 @@ public class HttpClientConfig {
 				.setConnectionManager(poolingConnectionManager()).setKeepAliveStrategy(connectionKeepAliveStrategy())
 				.build();
 	}
-
-	@Bean
-	public Runnable idleConnectionMonitor(final PoolingHttpClientConnectionManager connectionManager) {
-		return new Runnable() {
-			@Override
-			@Scheduled(fixedDelay = 10000)
-			public void run() {		
-				try {
-					if (connectionManager != null) {
-						LOGGER.trace("run IdleConnectionMonitor - Closing expired and idle connections...");
-						connectionManager.closeExpiredConnections();
-						connectionManager.closeIdleConnections(CLOSE_IDLE_CONNECTION_WAIT_TIME_SECS, TimeUnit.SECONDS);
-					} else {
-						LOGGER.trace("run IdleConnectionMonitor - Http Client Connection manager is not initialised");
-					}
-				} catch (Exception e) {
-					LOGGER.error("run IdleConnectionMonitor - Exception occurred. msg={}, e={}", e.getMessage(), e);
-				}
-			}
-		};
-	}
+//
+//	@Bean
+//	public Runnable idleConnectionMonitor(final PoolingHttpClientConnectionManager connectionManager) {
+//		return new Runnable() {
+//			@Override
+//			@Scheduled(fixedDelay = 10000)
+//			public void run() {		
+//				try {
+//					if (connectionManager != null) {
+//						LOGGER.trace("run IdleConnectionMonitor - Closing expired and idle connections...");
+//						connectionManager.closeExpiredConnections();
+//						connectionManager.closeIdleConnections(CLOSE_IDLE_CONNECTION_WAIT_TIME_SECS, TimeUnit.SECONDS);
+//					} else {
+//						LOGGER.trace("run IdleConnectionMonitor - Http Client Connection manager is not initialised");
+//					}
+//				} catch (Exception e) {
+//					LOGGER.error("run IdleConnectionMonitor - Exception occurred. msg={}, e={}", e.getMessage(), e);
+//				}
+//			}
+//		};
+//	}
 }
