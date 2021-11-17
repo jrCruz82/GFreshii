@@ -14,13 +14,13 @@ import com.edbootcamp.api.manager.IngredientManager;
 @RestController
 public class RESTIngredientManagerImpl implements IngredientManager{
 
-	private final String REQUEST_URI = "http://localhost:8080/GFreshiiBackend/";
+	private final String REQUEST_URI = "http://localhost:8080/GFreshiiBackend/recipes";
 	@Autowired
 	private RestTemplate restTemplate;
 	
 	
 	public List<IngredientView> allIngredientsByRecipe(Long id) {
-		String requestUri = REQUEST_URI + "recipes/ingredientsByRecipe/{id}";
+		String requestUri = REQUEST_URI + "/ingredientsByRecipe/{id}";
 		IngredientViewImpl[] response = restTemplate.getForObject(requestUri, IngredientViewImpl[].class, Long.toString(id));
 		List<IngredientView> ingredients = new ArrayList<>();
 		for(IngredientView ingredient: response) {
@@ -31,7 +31,7 @@ public class RESTIngredientManagerImpl implements IngredientManager{
 	}
 	
 	public List<IngredientView> saveIngredient(Long id, IngredientView ingredient) {
-		String requestUri = REQUEST_URI + "recipes/addIngredient/{id}";
+		String requestUri = REQUEST_URI + "/addIngredient/{id}";
 		Map < String, String > params = new HashMap < String, String > ();
         params.put("id", Long.toString(id));
         IngredientViewImpl[] response = restTemplate.postForObject(requestUri, ingredient, IngredientViewImpl[].class, params);
@@ -44,7 +44,7 @@ public class RESTIngredientManagerImpl implements IngredientManager{
 	
 	
 	public void deleteIngredientById(Long id,IngredientView ingredient) {
-		String requestUri = REQUEST_URI + "recipes/deleteIngredient/";
+		String requestUri = REQUEST_URI + "/deleteIngredient/";
 		Map < String, String > params = new HashMap < String, String > ();
         params.put("id", Long.toString(id));
 		restTemplate.put(requestUri + "/{id}", ingredient ,params);
@@ -52,7 +52,7 @@ public class RESTIngredientManagerImpl implements IngredientManager{
 
 	
 	public IngredientView updateIngredientById(Long id,IngredientView ingredient) {
-		String requestUri = REQUEST_URI + "recipes/updateIngredient/";
+		String requestUri = REQUEST_URI + "/updateIngredient/";
 		Map < String, String > params = new HashMap < String, String > ();
         params.put("id", Long.toString(id));
 		restTemplate.put(requestUri + "/{id}",ingredient, params);
