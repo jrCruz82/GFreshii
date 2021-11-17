@@ -11,14 +11,13 @@ import com.edbootcamp.api.dao.RecipeDAO;
 import com.edbootcamp.api.entity.Recipe;
 import com.edbootcamp.api.service.RecipeService;
 
-
+@Transactional
 @Service
 public class RecipeServiceImpl implements RecipeService{
 	
 	@Autowired
 	private RecipeDAO dao;
-	
-	@Transactional
+
 	@Override
 	public List<Recipe> fetchAllRecipes(){
 		return dao.allRecipes();

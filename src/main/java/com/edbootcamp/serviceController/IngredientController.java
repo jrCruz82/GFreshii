@@ -28,7 +28,7 @@ public class IngredientController {
 	
 	@GetMapping(value = "/recipes/ingredientsByRecipe/{id}")
     public ResponseEntity<List<Ingredient>> getAllIngredientsByRecipeId(@PathVariable ("id") Long id) {
-        
+        LOGGER.info("i am in the backend");
 		List<Ingredient> ingredients = iDao.allIngredients(id);
         
 		for(Ingredient list: ingredients) {
@@ -55,6 +55,7 @@ public class IngredientController {
         	LOGGER.error("Unable to delete. Ingredient with name " + ingredientView.getName() + " not found");
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
+        LOGGER.info("deleting ingredient " + ingredient.getName() + " for recipe with id "+ id);
         iDao.deleteIngredient(id, ingredient);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }

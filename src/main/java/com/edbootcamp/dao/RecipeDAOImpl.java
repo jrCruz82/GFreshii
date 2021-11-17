@@ -70,7 +70,6 @@ public class RecipeDAOImpl implements RecipeDAO {
 	public Boolean isRecipeExist(Recipe recipe) {
 		Session session = sessionFactory.getCurrentSession();
 		Query query = session.createQuery("FROM RecipeImpl r where r.name = :name").setParameter("name", recipe.getName());
-		System.out.println(query.list() + "\n\n\n");
 		List<Recipe> list = query.list();
 		if(list.isEmpty()) {
 			return false;
