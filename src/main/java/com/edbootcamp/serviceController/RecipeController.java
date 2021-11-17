@@ -13,16 +13,11 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.edbootcamp.api.entity.Recipe;
 import com.edbootcamp.api.service.RecipeService;
 import com.edbootcamp.entity.RecipeImpl;
-
-
-
 
 @RestController
 public class RecipeController {
@@ -68,7 +63,7 @@ public class RecipeController {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
         LOGGER.info("Updating recipe name " + recipe.getName());
-		Recipe recipeView = recipeService.updateRecipe(recipe);
+		recipeService.updateRecipe(recipe);
 		LOGGER.info("updated recipe name " + recipe.getName() + " in the backend");
 		
         return new ResponseEntity<Recipe>( HttpStatus.CREATED);
