@@ -3,7 +3,7 @@
 
 angular.module('RecipeListApp').factory('recipeService', ['$http','$q','$log', function($http, $q, $log) {
 	
-	var REST_SERVICE_URI = 'http://localhost:8080/GFreshiiBackend/recipes/';
+	var REST_SERVICE_URI = 'recipes/';
 
 	var factory = {
 		createRecipe : createRecipe,

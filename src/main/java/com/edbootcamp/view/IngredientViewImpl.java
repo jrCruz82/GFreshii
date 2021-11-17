@@ -4,15 +4,15 @@ import com.edbootcamp.api.views.IngredientView;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class IngredientViewImpl implements IngredientView{
-	@JsonProperty
+	@JsonProperty("id")
 	private Long id;
-	@JsonProperty
+	@JsonProperty("name")
 	private String name;
-	@JsonProperty
+	@JsonProperty("amount")
 	private String amount;
-	@JsonProperty
+	@JsonProperty("unit")
 	private String unit;
-	@JsonProperty
+	@JsonProperty("recipeId")
 	private RecipeViewImpl recipeId;
 	
 	public Long getId() {

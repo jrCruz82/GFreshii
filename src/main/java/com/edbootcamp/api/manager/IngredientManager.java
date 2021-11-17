@@ -8,7 +8,7 @@ import com.edbootcamp.api.views.IngredientView;
 public interface IngredientManager {
 
 	List<IngredientView> allIngredientsByRecipe(Long id);
-	IngredientView saveIngredient(Long id, IngredientView ingredient);
+	List<IngredientView> saveIngredient(Long id, IngredientView ingredient);
 	void deleteIngredientById(Long id, IngredientView ingredient);
 	IngredientView updateIngredientById(Long id, IngredientView ingredient);
 }

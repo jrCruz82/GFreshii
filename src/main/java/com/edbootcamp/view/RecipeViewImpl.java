@@ -8,15 +8,17 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 //TODO Delete all the Hibernates stuff,  add JSON annotations as needed for the UI
 
 public class RecipeViewImpl implements RecipeView {
-	@JsonProperty
+	@JsonProperty("id")
 	private Long id;
-	@JsonProperty
+	@JsonProperty("name")
 	private String name;
-	@JsonProperty
+	@JsonProperty("instruction")
 	private String instruction;	
-	@JsonProperty
+	@JsonProperty("ingredients")
 	private List<IngredientViewImpl> ingredients;
 
+	public RecipeViewImpl() {}
+	
 	public Long getId() {
 		return id;
 	}
