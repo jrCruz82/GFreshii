@@ -11,7 +11,7 @@
         <failOnMissingWebXml>false</failOnMissingWebXml>
         <spring.version>4.3.1.RELEASE</spring.version>
         <hibernate.version>4.3.6.Final</hibernate.version>
-        <hibernate.validator>5.3.1.Final</hibernate.validator>
+        <hibernate.validator>4.3.2.Final</hibernate.validator>
         <c3p0.version>0.9.5.2</c3p0.version>
         <jstl.version>1.2.1</jstl.version>
         <tld.version>1.1.2</tld.version>
@@ -25,12 +25,6 @@
             <groupId>org.springframework</groupId>
             <artifactId>spring-webmvc</artifactId>
             <version>${spring.version}</version>
-            <exclusions>
-                <exclusion>
-                    <groupId>commons-logging</groupId>
-                    <artifactId>commons-logging</artifactId>
-                </exclusion>
-            </exclusions>
         </dependency>
         <!-- Spring ORM -->
         <dependency>
@@ -49,13 +43,6 @@
             <artifactId>hibernate-validator</artifactId>
             <version>${hibernate.validator}</version>
         </dependency>
-        <!-- https://mvnrepository.com/artifact/org.springframework.data/spring-data-jpa -->
-        <dependency>
-            <groupId>org.springframework.data</groupId>
-            <artifactId>spring-data-jpa</artifactId>
-            <version>2.1.0.RELEASE</version>
-        </dependency>
-        <!-- JSTL Dependency -->
         <dependency>
             <groupId>javax.servlet.jsp.jstl</groupId>
             <artifactId>javax.servlet.jsp.jstl-api</artifactId>
@@ -86,29 +73,16 @@
             <version>5.1.47</version>
         </dependency>
         <!-- logging -->
-        <dependency>
-            <groupId>org.slf4j</groupId>
-            <artifactId>jcl-over-slf4j</artifactId>
-            <version>1.7.20</version>
-        </dependency>
-        <dependency>
-            <groupId>ch.qos.logback</groupId>
-            <artifactId>logback-classic</artifactId>
-            <version>1.1.7</version>
-        </dependency>
+		<dependency>  
+		    <groupId>log4j</groupId>  
+		    <artifactId>log4j</artifactId>  
+		    <version>1.2.17</version>  
+		</dependency>  
       	<dependency>
 			<groupId>com.fasterxml.jackson.core</groupId>
 			<artifactId>jackson-databind</artifactId>
 			<version>2.9.7</version>
-		</dependency>
-      	<!-- https://mvnrepository.com/artifact/com.google.common/google-collect -->
-		<dependency>
-		  <groupId>com.google.collections</groupId>
-		  <artifactId>google-collections</artifactId>
-		  <version>1.0-rc1</version>
-		</dependency>
-
-      	
+		</dependency> 	
         <dependency>
 	      <groupId>com.googlecode.json-simple</groupId>
 	      <artifactId>json-simple</artifactId>

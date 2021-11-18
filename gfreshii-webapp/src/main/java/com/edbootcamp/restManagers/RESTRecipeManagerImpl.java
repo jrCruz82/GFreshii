@@ -10,10 +10,10 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
 import com.edbootcamp.api.manager.RecipeManager;
-import com.edbootcamp.api.views.RecipeView;
-import com.edbootcamp.view.RecipeViewImpl;
+import com.edbootcamp.api.views.Recipe;
+import com.edbootcamp.view.RecipeImpl;
 
-@Service("recipeManager")
+@Service
 public class RESTRecipeManagerImpl implements RecipeManager{
 
 	//Any code related to preparing view objects to be sent to UI, or coming back from the database
@@ -22,22 +22,22 @@ public class RESTRecipeManagerImpl implements RecipeManager{
 	private RestTemplate restTemplate;
 	
 
-	public List<RecipeView> allRecipes() {
+	public List<Recipe> allRecipes() {
 		String requestUri = REQUEST_URI + "/";
-		RecipeViewImpl[] response = restTemplate.getForObject(requestUri, RecipeViewImpl[].class);
-		List<RecipeView> recipes = new ArrayList<>();
-		for(RecipeView recipe: response) {
+		RecipeImpl[] response = restTemplate.getForObject(requestUri, RecipeImpl[].class);
+		List<Recipe> recipes = new ArrayList<>();
+		for(Recipe recipe: response) {
 			recipes.add(recipe);
 		}
 		return recipes;
 	}
 	
-	public RecipeView saveRecipe(RecipeView recipe) {
+	public Recipe saveRecipe(Recipe recipe) {
 		String requestUri = REQUEST_URI + "/createRecipe";
-		return restTemplate.postForObject(requestUri, recipe, RecipeViewImpl.class);
+		return restTemplate.postForObject(requestUri, recipe, RecipeImpl.class);
 	}
 
-	public RecipeView updateRecipe(RecipeView currentRecipe) {
+	public Recipe updateRecipe(Recipe currentRecipe) {
 		String requestUri = REQUEST_URI + "/updateRecipe/";
 		Long id = currentRecipe.getId();
 		Map < String, String > params = new HashMap < String, String > ();
@@ -53,7 +53,7 @@ public class RESTRecipeManagerImpl implements RecipeManager{
 		restTemplate.delete(requestUri + "/{id}",params);
 	}
 
-	public RecipeView addInstruction(Long id, RecipeView recipe) {
+	public Recipe addInstruction(Long id, Recipe recipe) {
 		String requestUri = REQUEST_URI + "/addInstruction/";
 		Map < String, String > params = new HashMap < String, String > ();
         params.put("id", Long.toString(id));

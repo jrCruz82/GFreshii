@@ -1,9 +1,9 @@
 package com.edbootcamp.view;
 
-import com.edbootcamp.api.views.IngredientView;
+import com.edbootcamp.api.views.Ingredient;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-public class IngredientViewImpl implements IngredientView{
+public class IngredientImpl implements Ingredient{
 	@JsonProperty("id")
 	private Long id;
 	@JsonProperty("name")
@@ -13,7 +13,7 @@ public class IngredientViewImpl implements IngredientView{
 	@JsonProperty("unit")
 	private String unit;
 	@JsonProperty("recipeId")
-	private RecipeViewImpl recipeId;
+	private RecipeImpl recipeId;
 	
 	public Long getId() {
 		return id;
@@ -40,11 +40,11 @@ public class IngredientViewImpl implements IngredientView{
 		this.unit = unit;
 	}
 	
-	public RecipeViewImpl getRecipe() {
+	public RecipeImpl getRecipe() {
 		return recipeId;
 	}
 	
-	public void setRecipe(RecipeViewImpl recipeId) {
+	public void setRecipe(RecipeImpl recipeId) {
 		this.recipeId =  recipeId;
 	}
 
