@@ -2,15 +2,16 @@ package com.edbootcamp.api.manager;
 
 import java.util.List;
 
-import com.edbootcamp.api.views.RecipeView;
+import com.edbootcamp.api.views.Recipe;
+
 
 public interface RecipeManager{
 	
-	List<RecipeView> allRecipes();
-	RecipeView saveRecipe(RecipeView recipe);
-	RecipeView updateRecipe(RecipeView currentRecipe);
+	List<Recipe> allRecipes();
+	Recipe saveRecipe(Recipe recipe);
+	Recipe updateRecipe(Recipe currentRecipe);
 	void deleteRecipeById(Long id);
-	RecipeView addInstruction(Long id, RecipeView recipe);
+	Recipe addInstruction(Long id, Recipe recipe);
 	void deleteRecipeInstructionById(Long id);
 	
 }

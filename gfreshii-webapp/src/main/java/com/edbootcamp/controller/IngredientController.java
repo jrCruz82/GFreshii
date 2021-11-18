@@ -2,8 +2,8 @@ package com.edbootcamp.controller;
 
 import java.util.List;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.apache.log4j.LogManager;  
+import org.apache.log4j.Logger; 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -14,50 +14,42 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.edbootcamp.api.views.IngredientView;
+import com.edbootcamp.api.views.Ingredient;
 import com.edbootcamp.restManagers.RESTIngredientManagerImpl;
-import com.edbootcamp.view.IngredientViewImpl;
+import com.edbootcamp.view.IngredientImpl;
 
 @RestController
 public class IngredientController {
 
-	private static Logger LOGGER = LoggerFactory.getLogger(IngredientController.class);
+	private static Logger LOGGER = LogManager.getLogger(IngredientController.class);
 	
 	@Autowired
 	private RESTIngredientManagerImpl restManager ;
 	
 	@GetMapping(value = "/recipes/ingredientsByRecipe/{id}")
-    public ResponseEntity<List<IngredientView>> getAllIngredientsByRecipeId(@PathVariable ("id") Long id) {
-        
-		List<IngredientView> ingredients = restManager.allIngredientsByRecipe(id);
-        
-		for(IngredientView list: ingredients) {
-        	LOGGER.info("Recipe ingredients for recipe Id:{} ",list.getName() );
-        }
-		return new ResponseEntity<List<IngredientView>>(ingredients, HttpStatus.OK);
+    public ResponseEntity<List<Ingredient>> getAllIngredientsByRecipeId(@PathVariable ("id") Long id) {  
+		List<Ingredient> ingredients = restManager.allIngredientsByRecipe(id);
+		return new ResponseEntity<List<Ingredient>>(ingredients, HttpStatus.OK);
     }
 	
 	@PostMapping(value = "/recipes/addIngredient/{id}")
-    public ResponseEntity<List<IngredientView>> addIngredient(@PathVariable("id") Long id, @RequestBody IngredientViewImpl ingredient) {
+    public ResponseEntity<List<Ingredient>> addIngredient(@PathVariable("id") Long id, @RequestBody IngredientImpl ingredient) {
 		LOGGER.info("Adding ingredient " + ingredient.getName());
 		restManager.saveIngredient(id, ingredient);
-        List<IngredientView> listIngredientView =  restManager.allIngredientsByRecipe(id);
-        for(IngredientView list: listIngredientView) {
-        	LOGGER.info("Recipe ingredients for recipe Id:{} ",list.getName() );
-        }
-        return new ResponseEntity<List<IngredientView>>( listIngredientView, HttpStatus.OK);
+        List<Ingredient> listIngredientView =  restManager.allIngredientsByRecipe(id);
+        return new ResponseEntity<List<Ingredient>>( listIngredientView, HttpStatus.OK);
     }
 	
     @PutMapping(value = "/recipes/deleteIngredient/{id}")
-    public ResponseEntity<Void> deleteIngredient(@PathVariable("id") Long id, @RequestBody IngredientViewImpl ingredientView) {
+    public ResponseEntity<Void> deleteIngredient(@PathVariable("id") Long id, @RequestBody IngredientImpl ingredientView) {
         restManager.deleteIngredientById(id, ingredientView);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
     
     @PutMapping(value = "/recipes/updateIngredient/{id}")
-    public ResponseEntity<List<IngredientView>> updateIngredient(@PathVariable("id") Long id, @RequestBody IngredientViewImpl ingredientView) {
+    public ResponseEntity<List<Ingredient>> updateIngredient(@PathVariable("id") Long id, @RequestBody IngredientImpl ingredientView) {
         restManager.updateIngredientById(id, ingredientView);
-        List<IngredientView> listIngredientView =  restManager.allIngredientsByRecipe(id);
-        return new ResponseEntity<List<IngredientView>>(listIngredientView, HttpStatus.NO_CONTENT);
+        List<Ingredient> listIngredient =  restManager.allIngredientsByRecipe(id);
+        return new ResponseEntity<List<Ingredient>>(listIngredient, HttpStatus.NO_CONTENT);
     }
 }

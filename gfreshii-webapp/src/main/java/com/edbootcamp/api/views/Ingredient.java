@@ -1,8 +1,8 @@
 package com.edbootcamp.api.views;
 
-import com.edbootcamp.view.RecipeViewImpl;
+import com.edbootcamp.view.RecipeImpl;
 
-public interface IngredientView {
+public interface Ingredient {
 
 	Long getId();
 	void setId(Long id);
@@ -12,8 +12,8 @@ public interface IngredientView {
 	void setAmount(String amount);
 	String getUnit();
 	void setUnit(String unit);
-	RecipeViewImpl getRecipe();
-	void setRecipe(RecipeViewImpl recipe);
+	RecipeImpl getRecipe();
+	void setRecipe(RecipeImpl recipe);
 }
 
 
