@@ -17,7 +17,7 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 
 
 @Entity
-@Table(name = "ingredient")
+@Table(name = "INGREDIENT")
 public class IngredientImpl implements Ingredient{
 	
 	
@@ -38,8 +38,7 @@ public class IngredientImpl implements Ingredient{
 	private String unit;
 	
 	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-	@JoinColumn(name = "recipeID",referencedColumnName = "ID")
-	@JsonBackReference
+	@JoinColumn(name = "RECIPE_ID",referencedColumnName = "ID")
 	private RecipeImpl recipe;
 	
 	public IngredientImpl() {}

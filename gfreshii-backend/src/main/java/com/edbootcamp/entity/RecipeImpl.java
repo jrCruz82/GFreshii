@@ -13,13 +13,15 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.Size;
 
+import com.edbootcamp.api.entity.Ingredient;
 import com.edbootcamp.api.entity.Recipe;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 
 //TODO Delete any JSON stuff that's only used for the UI
 
 @Entity
-@Table(name = "RECIPE")//RECIPE6t 
+@Table(name = "RECIPE")
 public class RecipeImpl implements  Recipe {
 
 	@Id
@@ -32,11 +34,11 @@ public class RecipeImpl implements  Recipe {
 	@Column(name = "INSTRUCTION")
 	private String instruction;	
 	//lazy
-	@OneToMany(fetch = FetchType.EAGER, mappedBy = "recipe", cascade =CascadeType.ALL, orphanRemoval = false)
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "recipe", cascade =CascadeType.ALL, orphanRemoval = false)
+	@JsonIgnore
 	private List<IngredientImpl> ingredients;
 		
 	public RecipeImpl() {}
-	
 	
 	public Long getId() {
 		return id;

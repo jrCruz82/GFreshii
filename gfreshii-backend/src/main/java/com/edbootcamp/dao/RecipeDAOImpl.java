@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.transaction.Transactional;
 
+import org.hibernate.Hibernate;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -32,9 +33,12 @@ public class RecipeDAOImpl implements RecipeDAO {
 	@Override
 	public List<Recipe> allRecipes() {
 		Session session = sessionFactory.getCurrentSession();
+		
 		Query query = session.createQuery("from RecipeImpl");
-		List<?> list = query.list();
-		return (List<Recipe>) list;
+		Hibernate.initialize(query.list());
+		List<Recipe> list = query.list();
+		System.out.println(list);
+		return list;
 	}
 
 	@Override

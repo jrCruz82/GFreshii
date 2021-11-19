@@ -23,7 +23,7 @@ import com.edbootcamp.entity.RecipeImpl;
 @RestController
 public class RecipeController {
 
-	private static Logger LOGGER = LogManager.getLogger(RecipeController.class);
+	private static Logger logger = LogManager.getLogger(RecipeController.class);
 
 	//private final String REQUEST_URI = "http://localhost:8080/GFreshii/";
 	@Autowired
@@ -31,11 +31,10 @@ public class RecipeController {
 	
 	@GetMapping(value = "recipes/")
     public ResponseEntity<List<Recipe>> findAllRecipes() {
-		LOGGER.info("Fetching list of recipes in the backend.");
+		logger.info("Fetching list of recipes in the backend.");
         List<Recipe> recipes =  recipeService.fetchAllRecipes();
-        
         if(recipes.isEmpty()){
-        	LOGGER.error("No Recipes have been saved yet");
+        	logger.error("No Recipes have been saved yet");
             return new ResponseEntity<List<Recipe>>(HttpStatus.NO_CONTENT);
         }
         return new ResponseEntity<List<Recipe>>(recipes,HttpStatus.OK);
@@ -45,10 +44,10 @@ public class RecipeController {
     public ResponseEntity<Recipe> createRecipe(@RequestBody RecipeImpl recipe) {
 		
 		if (recipeService.isRecipeExist(recipe)) {
-           LOGGER.error("A Recipe with that name already exist");
+           logger.error("A Recipe with that name already exist");
             return new ResponseEntity<Recipe>( HttpStatus.CONFLICT);
         }
-		LOGGER.info("Creating Recipe " + recipe.getName());
+		logger.info("Creating Recipe " + recipe.getName());
 		Recipe recipeView = recipeService.saveRecipe(recipe);
         return new ResponseEntity<Recipe>(recipeView, HttpStatus.CREATED);
     }
@@ -57,22 +56,22 @@ public class RecipeController {
     public ResponseEntity<Recipe> updateRecipe(@PathVariable("id") Long id ,@RequestBody RecipeImpl recipe) {
 		Recipe recipeV = recipeService.findById(id);
         if (recipeV == null) {
-        	LOGGER.error("Unable to update. Recipe with id " + id + " not found");
+        	logger.error("Unable to update. Recipe with id " + id + " not found");
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
-        LOGGER.info("Updating recipe with name " + recipe.getName());
+        logger.info("Updating recipe with name " + recipe.getName());
 		recipeService.updateRecipe(recipe);
-		LOGGER.info("updated recipe name " + recipe.getName() + " in the backend");
+		logger.info("updated recipe name " + recipe.getName() + " in the backend");
 		
         return new ResponseEntity<Recipe>( HttpStatus.CREATED);
     }
     
     @DeleteMapping(value = "recipes/deleteRecipe/{id}")
     public ResponseEntity<Recipe> deleteRecipe(@PathVariable("id") Long id) {
-    	LOGGER.info("Fetching & Deleting Recipe with id " + id);
+    	logger.info("Fetching & Deleting Recipe with id " + id);
         Recipe recipe = recipeService.findById(id);
         if (recipe == null) {
-        	LOGGER.error("Unable to delete. Recipe with id " + id + " not found");
+        	logger.error("Unable to delete. Recipe with id " + id + " not found");
             return new ResponseEntity<Recipe>(HttpStatus.NOT_FOUND);
         }
         recipeService.deleteRecipeById(id);
@@ -81,10 +80,10 @@ public class RecipeController {
     
     @DeleteMapping(value = "recipes/deleteInstruction/{id}")
     public ResponseEntity<?> deleteInstruction(@PathVariable("id") Long id) {
-    	LOGGER.info("Fetching & Deleting Recipe instructions with id " + id);
+    	logger.info("Fetching & Deleting Recipe instructions with id " + id);
         Recipe recipe = recipeService.findById(id);
         if (recipe == null) {
-        	LOGGER.error("Unable to delete Instructions. Recipe with id " + id + " not found");
+        	logger.error("Unable to delete Instructions. Recipe with id " + id + " not found");
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
         recipeService.deleteRecipeInstructionById(id);
@@ -94,12 +93,12 @@ public class RecipeController {
     @PutMapping(value = "recipes/addInstruction/{id}")
     public ResponseEntity<Recipe> addInstruction(@PathVariable("id") Long id ,@RequestBody RecipeImpl recipe) {
     	Recipe recipeV = recipeService.findById(id);
-    	LOGGER.info("Adding instructions to recipe " + recipe.getName());
+    	logger.info("Adding instructions to recipe " + recipe.getName());
         if (recipeV == null) {
-        	LOGGER.error("Unable to add instruction. Recipe with id " + id + " not found");
+        	logger.error("Unable to add instruction. Recipe with id " + id + " not found");
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
-        LOGGER.info("Updating recipe name " + recipe.getName() + " with new instructions");
+        logger.info("Updating recipe name " + recipe.getName() + " with new instructions");
 		Recipe recipeView = recipeService.addInstruction(id, recipe);
         return new ResponseEntity<Recipe>( HttpStatus.CREATED);
     }

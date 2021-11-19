@@ -27,7 +27,7 @@ import com.edbootcamp.view.RecipeImpl;
 @Controller
 public class RecipeController {
 
-	private static Logger LOGGER = LogManager.getLogger(RecipeController.class);
+	private static Logger logger = LogManager.getLogger(RecipeController.class);
 
 	@Autowired
 	private RESTRecipeManagerImpl restManager;
@@ -35,9 +35,9 @@ public class RecipeController {
 	@GetMapping(value = "recipes/",headers = "Accept=application/json" , produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<List<Recipe>> findAllRecipes() {
         List<Recipe> recipes =  restManager.allRecipes();
-        LOGGER.info("Looking for recipes in restmanager after returning from backend");
+        logger.info("Looking for recipes in restmanager after returning from backend");
         if(recipes.isEmpty()){
-        	LOGGER.error("No Recipes have been saved yet");
+        	logger.error("No Recipes have been saved yet");
             return new ResponseEntity<List<Recipe>>(HttpStatus.NO_CONTENT);
         }
         
@@ -46,35 +46,35 @@ public class RecipeController {
 	//add new recipe
 	@PostMapping(value = "/recipes/createRecipe")
     public ResponseEntity<Recipe> createRecipe(@RequestBody RecipeImpl recipe) {
-		LOGGER.info("Creating Recipe ");
+		logger.info("Creating Recipe ");
 		Recipe recipeView = restManager.saveRecipe(recipe);
         return new ResponseEntity<Recipe>(recipeView, HttpStatus.CREATED);
     }
 	
 	@PutMapping(value = "/recipes/updateRecipe/{id}")
     public ResponseEntity<Recipe> updateRecipe(@PathVariable("id") Long id ,@RequestBody RecipeImpl recipe) {
-        LOGGER.info("Updating recipe name ");
+        logger.info("Updating recipe name ");
         Recipe recipeView = restManager.updateRecipe(recipe);
         return new ResponseEntity<Recipe>(recipeView, HttpStatus.CREATED);
     }
     
     @DeleteMapping(value = "/recipes/deleteRecipe/{id}")
     public ResponseEntity<?> deleteRecipe(@PathVariable("id") Long id) {
-    	LOGGER.info("Fetching & Deleting Recipe ");
+    	logger.info("Fetching & Deleting Recipe ");
         restManager.deleteRecipeById(id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
     
     @DeleteMapping(value = "/recipes/deleteInstruction/{id}")
     public ResponseEntity<?> deleteInstruction(@PathVariable("id") Long id) {
-    	LOGGER.info("Fetching & Deleting Recipe instructions");
+    	logger.info("Fetching & Deleting Recipe instructions");
         restManager.deleteRecipeInstructionById(id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 	
     @RequestMapping(value = "/recipes/addInstruction/{id}", method = RequestMethod.PUT)
     public ResponseEntity<Recipe> addInstruction(@PathVariable("id") Long id ,@RequestBody RecipeImpl recipe) {
-        LOGGER.info("Updating recipe name");
+        logger.info("Updating recipe name");
         Recipe recipeView = restManager.addInstruction(id, recipe);
         return new ResponseEntity<Recipe>(recipeView, HttpStatus.CREATED);
     }

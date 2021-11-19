@@ -21,7 +21,7 @@ import com.edbootcamp.view.IngredientImpl;
 @RestController
 public class IngredientController {
 
-	private static Logger LOGGER = LogManager.getLogger(IngredientController.class);
+	private static Logger logger = LogManager.getLogger(IngredientController.class);
 	
 	@Autowired
 	private RESTIngredientManagerImpl restManager ;
@@ -34,7 +34,7 @@ public class IngredientController {
 	
 	@PostMapping(value = "/recipes/addIngredient/{id}")
     public ResponseEntity<List<Ingredient>> addIngredient(@PathVariable("id") Long id, @RequestBody IngredientImpl ingredient) {
-		LOGGER.info("Adding ingredient " + ingredient.getName());
+		logger.info("Adding ingredient " + ingredient.getName());
 		restManager.saveIngredient(id, ingredient);
         List<Ingredient> listIngredientView =  restManager.allIngredientsByRecipe(id);
         return new ResponseEntity<List<Ingredient>>( listIngredientView, HttpStatus.OK);

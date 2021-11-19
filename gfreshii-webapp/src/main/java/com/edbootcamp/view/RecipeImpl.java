@@ -3,6 +3,8 @@ package com.edbootcamp.view;
 import java.util.List;
 
 import com.edbootcamp.api.views.Recipe;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 //TODO Delete all the Hibernates stuff,  add JSON annotations as needed for the UI
@@ -15,6 +17,7 @@ public class RecipeImpl implements Recipe {
 	@JsonProperty("instruction")
 	private String instruction;	
 	@JsonProperty("ingredients")
+	@JsonIgnoreProperties(value= {"ingredients"})
 	private List<IngredientImpl> ingredients;
 
 	public RecipeImpl() {}

@@ -14,7 +14,7 @@ import org.springframework.web.client.RestTemplate;
 public class RestTemplateConfig {
 
 	@Autowired
-    CloseableHttpClient httpClient;
+    private CloseableHttpClient httpClient;
  
     @Bean
     public RestTemplate restTemplate() {
