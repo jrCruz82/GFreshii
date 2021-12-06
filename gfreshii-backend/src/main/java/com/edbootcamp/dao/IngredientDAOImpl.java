@@ -29,12 +29,12 @@ public class IngredientDAOImpl implements IngredientDAO{
 	private SessionFactory sessionFactory;
 	
 	@Autowired 
-	HibernateTemplate hibernateTemplate;
+	private HibernateTemplate hibernateTemplate;
 	
 	@Override
 	public List<Ingredient> allIngredients(Long id) {
 		Session session = sessionFactory.getCurrentSession();
-		Query query = session.createQuery("from IngredientImpl where recipeID=:id");
+		Query query = session.createQuery("from IngredientImpl where RECIPE_ID=:id");
 		query.setParameter("id", id);
 		@SuppressWarnings("unchecked")
 		List<Ingredient> list = query.list();
@@ -60,7 +60,7 @@ public class IngredientDAOImpl implements IngredientDAO{
 	@Override
 	public Ingredient findByName(String name, Long id) {
 		Session session = sessionFactory.getCurrentSession();
-		SQLQuery query = session.createSQLQuery("select * from INGREDIENT as i where i.NAME = :name and i.recipeID=:id");
+		SQLQuery query = session.createSQLQuery("select * from INGREDIENT as i where i.NAME = :name and i.RECIPE_ID=:id");
 		query.addEntity(IngredientImpl.class);
 		query.setParameter("name",name);
 		query.setLong("id",id);

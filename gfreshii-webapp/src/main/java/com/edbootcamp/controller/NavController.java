@@ -22,6 +22,12 @@ public class NavController {
 		model.addAttribute(model);
 		return new ModelAndView("home");
 	}
+	
+	@RequestMapping(value = "/login", method = RequestMethod.GET)
+	public ModelAndView navToLogin(Model model) {
+		model.addAttribute(model);
+		return new ModelAndView("login");
+	}
 
 	@RequestMapping(value = "/recipe", method = RequestMethod.GET)
 	public ModelAndView navToRecipe(Model model) {

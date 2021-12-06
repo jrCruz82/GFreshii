@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.edbootcamp.api.views.Ingredient;
@@ -19,34 +20,35 @@ import com.edbootcamp.restManagers.RESTIngredientManagerImpl;
 import com.edbootcamp.view.IngredientImpl;
 
 @RestController
+@RequestMapping("user/recipes/")
 public class IngredientController {
 
-	private static Logger LOGGER = LogManager.getLogger(IngredientController.class);
+	private static Logger logger = LogManager.getLogger(IngredientController.class);
 	
 	@Autowired
 	private RESTIngredientManagerImpl restManager ;
 	
-	@GetMapping(value = "/recipes/ingredientsByRecipe/{id}")
+	@GetMapping(value = "/ingredientsByRecipe/{id}")
     public ResponseEntity<List<Ingredient>> getAllIngredientsByRecipeId(@PathVariable ("id") Long id) {  
 		List<Ingredient> ingredients = restManager.allIngredientsByRecipe(id);
 		return new ResponseEntity<List<Ingredient>>(ingredients, HttpStatus.OK);
     }
 	
-	@PostMapping(value = "/recipes/addIngredient/{id}")
+	@PostMapping(value = "/addIngredient/{id}")
     public ResponseEntity<List<Ingredient>> addIngredient(@PathVariable("id") Long id, @RequestBody IngredientImpl ingredient) {
-		LOGGER.info("Adding ingredient " + ingredient.getName());
+		logger.info("Adding ingredient " + ingredient.getName());
 		restManager.saveIngredient(id, ingredient);
         List<Ingredient> listIngredientView =  restManager.allIngredientsByRecipe(id);
         return new ResponseEntity<List<Ingredient>>( listIngredientView, HttpStatus.OK);
     }
 	
-    @PutMapping(value = "/recipes/deleteIngredient/{id}")
+    @PutMapping(value = "/deleteIngredient/{id}")
     public ResponseEntity<Void> deleteIngredient(@PathVariable("id") Long id, @RequestBody IngredientImpl ingredientView) {
         restManager.deleteIngredientById(id, ingredientView);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
     
-    @PutMapping(value = "/recipes/updateIngredient/{id}")
+    @PutMapping(value = "/updateIngredient/{id}")
     public ResponseEntity<List<Ingredient>> updateIngredient(@PathVariable("id") Long id, @RequestBody IngredientImpl ingredientView) {
         restManager.updateIngredientById(id, ingredientView);
         List<Ingredient> listIngredient =  restManager.allIngredientsByRecipe(id);

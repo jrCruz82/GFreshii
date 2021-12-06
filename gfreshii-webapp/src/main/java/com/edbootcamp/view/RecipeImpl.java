@@ -3,9 +3,8 @@ package com.edbootcamp.view;
 import java.util.List;
 
 import com.edbootcamp.api.views.Recipe;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
-
-//TODO Delete all the Hibernates stuff,  add JSON annotations as needed for the UI
 
 public class RecipeImpl implements Recipe {
 	@JsonProperty("id")
@@ -14,7 +13,10 @@ public class RecipeImpl implements Recipe {
 	private String name;
 	@JsonProperty("instruction")
 	private String instruction;	
+	@JsonProperty("user")
+	private UserImpl user;
 	@JsonProperty("ingredients")
+	@JsonIgnoreProperties(value= {"ingredients"}, allowSetters = true)
 	private List<IngredientImpl> ingredients;
 
 	public RecipeImpl() {}
@@ -51,10 +53,19 @@ public class RecipeImpl implements Recipe {
 		this.instruction = instruction;
 	}
 
-    @Override
-    public String toString() {
-        return "Recipe [id=" + id + ", name=" + name +", instructions"+instruction +"]";
-    }
+	public UserImpl getUser() {
+		return user;
+	}
+
+	public void setUser(UserImpl user) {
+		this.user = user;
+	}
+
+	@Override
+	public String toString() {
+		return "RecipeImpl [id=" + id + ", name=" + name + ", instruction=" + instruction + ", user=" + user
+				+ ", ingredients=" + ingredients + "]";
+	}
 
 
 	

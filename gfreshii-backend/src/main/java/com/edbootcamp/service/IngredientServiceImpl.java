@@ -13,36 +13,36 @@ import com.edbootcamp.api.service.IngredientService;
 public class IngredientServiceImpl implements IngredientService{
 
 	@Autowired
-	private IngredientDAO iDao;
+	private IngredientDAO dao;
 	
 	@Override
 	public List<Ingredient> fetchAllIngredientsByRecipe(Long id) {
-		return iDao.allIngredients(id);
+		return dao.allIngredients(id);
 	}
 
 	@Override
 	public Ingredient saveIngredient(Long id, Ingredient ingredient) {
-		return iDao.saveIngredient(id, ingredient);
+		return dao.saveIngredient(id, ingredient);
 	}
 
 	@Override
 	public void deleteIngredient(Long id, Ingredient ingredient) {
-		iDao.deleteIngredient(id, ingredient);
+		dao.deleteIngredient(id, ingredient);
 	}
 
 	@Override
 	public Ingredient findByName(String name, Long id) {
-		return iDao.findByName(name, id);
+		return dao.findByName(name, id);
 	}
 
 	@Override
 	public Ingredient updateIngredient(Long id, Ingredient impl) {
-		return iDao.updateIngredient(id,impl);
+		return dao.updateIngredient(id,impl);
 	}
 
 	@Override
 	public Ingredient findById(Long id) {
-		return iDao.findById(id);
+		return dao.findById(id);
 	}
 
 }

@@ -20,9 +20,9 @@ angular.module('RecipeListApp').factory('recipeService', ['$http','$q','$log', f
 	
 	return factory;
 	
-	function allRecipes() {
+	function allRecipes(id) {
 		let deferred = $q.defer();
-		$http.get(REST_SERVICE_URI).then(function(response){
+		$http.get(REST_SERVICE_URI+id).then(function(response){
 			deferred.resolve(response.data);
 		}, function(errResponse){
 			$log.error('Error while fetching Recipes...');
@@ -44,7 +44,7 @@ angular.module('RecipeListApp').factory('recipeService', ['$http','$q','$log', f
 	
 	function ingredientsByRecipe(id) {
 		let deferred = $q.defer();
-		$http.get(REST_SERVICE_URI+'ingredientsByRecipe/'+id ).then(function(response){
+		$http.get(REST_SERVICE_URI+'ingredientsByRecipe/'+id).then(function(response){
 			deferred.resolve(response.data);
 		}, function(errResponse){
 			$log.error('Error while fetching Ingredients...');
@@ -66,9 +66,10 @@ angular.module('RecipeListApp').factory('recipeService', ['$http','$q','$log', f
 		return deferred.promise;
 	}
 	
-	function createRecipe(recipe) {
+	function createRecipe(recipe, id) {
 		let deferred = $q.defer();
-		$http.post(REST_SERVICE_URI+'createRecipe', recipe).then(function(response) {
+		$log.log(recipe);
+		$http.post(REST_SERVICE_URI+'createRecipe/'+id, recipe).then(function(response) {
 			deferred.resolve(response.data);
 			$log.log(response.data);
 		}, function(errResponse){

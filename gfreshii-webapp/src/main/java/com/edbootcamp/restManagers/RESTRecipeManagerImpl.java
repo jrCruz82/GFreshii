@@ -17,14 +17,16 @@ import com.edbootcamp.view.RecipeImpl;
 public class RESTRecipeManagerImpl implements RecipeManager{
 
 	//Any code related to preparing view objects to be sent to UI, or coming back from the database
-	private final String REQUEST_URI = "http://localhost:8080/GFreshiiBackend/recipes";
+	private final String REQUEST_URI = "http://localhost:8080/GFreshiiBackend/user/recipes";
 	@Autowired
 	private RestTemplate restTemplate;
 	
 
-	public List<Recipe> allRecipes() {
+	public List<Recipe> allRecipes(Long id) {
 		String requestUri = REQUEST_URI + "/";
-		RecipeImpl[] response = restTemplate.getForObject(requestUri, RecipeImpl[].class);
+		Map < String, String > params = new HashMap < String, String > ();
+        params.put("id", Long.toString(id));
+		RecipeImpl[] response = restTemplate.getForObject(requestUri+"/{id}", RecipeImpl[].class, params);
 		List<Recipe> recipes = new ArrayList<>();
 		for(Recipe recipe: response) {
 			recipes.add(recipe);
@@ -32,9 +34,12 @@ public class RESTRecipeManagerImpl implements RecipeManager{
 		return recipes;
 	}
 	
-	public Recipe saveRecipe(Recipe recipe) {
-		String requestUri = REQUEST_URI + "/createRecipe";
-		return restTemplate.postForObject(requestUri, recipe, RecipeImpl.class);
+	public Recipe saveRecipe(Recipe recipe, Long id) {
+		String requestUri = REQUEST_URI + "/createRecipe/";
+		Map < String, String > params = new HashMap < String, String > ();
+        params.put("id", Long.toString(id));
+		Recipe returnRecipe = restTemplate.postForObject(requestUri+"/{id}", recipe, RecipeImpl.class,params);
+		return returnRecipe;
 	}
 
 	public Recipe updateRecipe(Recipe currentRecipe) {
@@ -66,6 +71,7 @@ public class RESTRecipeManagerImpl implements RecipeManager{
 		String requestUri = REQUEST_URI + "/deleteInstruction/";
 		restTemplate.delete(requestUri + "/{id}", Long.toString(id));
 	}
+
 
 
 }
