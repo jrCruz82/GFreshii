@@ -81,19 +81,11 @@ public class IngredientImpl implements Ingredient{
 		this.recipe = recipe;
 	}
 
-
-	@Override
-	public String toString() {
-		return "Ingredient [id=" + id + ", name=" + name + ", amount=" + amount + ", unit=" + unit 
-				+", recipeid= " +recipe+ " ]";
-	}
-
-
-
-
-
-
-
-	
+//
+//	@Override
+//	public String toString() {
+//		return "Ingredient [id=" + id + ", name=" + name + ", amount=" + amount + ", unit=" + unit 
+//				+", recipeid= " +recipe+ " ]";
+//	}
 	
 }

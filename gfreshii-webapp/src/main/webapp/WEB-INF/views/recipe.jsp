@@ -11,6 +11,7 @@
 
 <title>Recipes</title>
 
+
 </head>
 
 <body ng-app="RecipeListApp" class="ng-cloak" ng-controller="recipeController as ctrl">
@@ -37,13 +38,17 @@
             			<li ng-repeat="name in ctrl.recipeNames track by $index "><a class="dropdown-item " type="button" ng-click="ctrl.loadRecipe($index)">{{name}}</a></li>
             		</ul>
 			    </li>
+			    <li class="nav-item active">
+					<a class="nav-link " href="/GFreshii/login">Logout</a>
+				</li>
 			</ul>
 		</div>
 
 	</nav>
 	<main>
 		<div class="p-3 text-center bg-light">
-		    <h1 class="mb-3">Recipe Form</h1>
+			<span style="display:none" id="user">${user}</span>
+		    <h1 class="mb-3">${user.userName}'s Recipe Form</h1>
 		</div>
       <div class="generic-container">
           <div class="panel panel-default">
@@ -159,6 +164,5 @@
 	<script src="<c:url value='/static/js/app.js' />"></script>
 	<script src="<c:url value='/static/js/recipeController.js' />"></script>
 	<script src="<c:url value='/static/js/recipeService.js' />"></script>
-
 </body>
 </html>

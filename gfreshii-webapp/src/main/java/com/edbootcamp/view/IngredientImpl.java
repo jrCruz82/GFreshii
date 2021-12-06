@@ -12,8 +12,8 @@ public class IngredientImpl implements Ingredient{
 	private String amount;
 	@JsonProperty("unit")
 	private String unit;
-	@JsonProperty("recipeId")
-	private RecipeImpl recipeId;
+	@JsonProperty("recipe")
+	private RecipeImpl recipe;
 	
 	public Long getId() {
 		return id;
@@ -41,17 +41,17 @@ public class IngredientImpl implements Ingredient{
 	}
 	
 	public RecipeImpl getRecipe() {
-		return recipeId;
+		return recipe;
 	}
 	
 	public void setRecipe(RecipeImpl recipeId) {
-		this.recipeId =  recipeId;
+		this.recipe =  recipeId;
 	}
 
 	@Override
 	public String toString() {
 		return "Ingredient [id=" + id + ", name=" + name + ", amount=" + amount + ", unit=" + unit + ", recipeId="
-				+recipeId + "]";
+				+recipe + "]";
 	}
 	
 }

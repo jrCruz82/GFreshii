@@ -20,13 +20,13 @@ public class RecipeServiceImpl implements RecipeService{
 	private RecipeDAO dao;
 	@Transactional
 	@Override
-	public List<Recipe> fetchAllRecipes(){
-		return dao.allRecipes();
+	public List<Recipe> fetchAllRecipes(Long id){
+		return dao.allRecipes(id);
 	}
 	@Transactional
 	@Override
-	public Recipe saveRecipe(Recipe recipe) {
-		return dao.saveRecipe(recipe);
+	public Recipe saveRecipe(Recipe recipe, Long id) {
+		return dao.saveRecipe(recipe, id);
 	}
 	@Transactional
 	@Override

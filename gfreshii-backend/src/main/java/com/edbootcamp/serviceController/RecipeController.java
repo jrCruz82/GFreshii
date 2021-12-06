@@ -1,8 +1,7 @@
 package com.edbootcamp.serviceController;
 
 import java.util.List;
-
-import org.apache.log4j.BasicConfigurator;  
+  
 import org.apache.log4j.LogManager;  
 import org.apache.log4j.Logger;  
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +13,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.edbootcamp.api.entity.Recipe;
@@ -21,38 +21,35 @@ import com.edbootcamp.api.service.RecipeService;
 import com.edbootcamp.entity.RecipeImpl;
 
 @RestController
+@RequestMapping("user/recipes/")
 public class RecipeController {
 
 	private static Logger logger = LogManager.getLogger(RecipeController.class);
 
-	//private final String REQUEST_URI = "http://localhost:8080/GFreshii/";
 	@Autowired
 	private RecipeService recipeService;
 	
-	@GetMapping(value = "recipes/")
-    public ResponseEntity<List<Recipe>> findAllRecipes() {
+	@GetMapping(value = "/{id}")
+    public ResponseEntity<List<Recipe>> findAllRecipes(@PathVariable("id") Long id) {
 		logger.info("Fetching list of recipes in the backend.");
-        List<Recipe> recipes =  recipeService.fetchAllRecipes();
-        if(recipes.isEmpty()){
-        	logger.error("No Recipes have been saved yet");
-            return new ResponseEntity<List<Recipe>>(HttpStatus.NO_CONTENT);
-        }
+        List<Recipe> recipes =  recipeService.fetchAllRecipes(id);
         return new ResponseEntity<List<Recipe>>(recipes,HttpStatus.OK);
     }
 	//add new recipe
-	@PostMapping(value = "recipes/createRecipe")
-    public ResponseEntity<Recipe> createRecipe(@RequestBody RecipeImpl recipe) {
-		
+	@PostMapping(value = "/createRecipe/{id}")
+    public ResponseEntity<Recipe> createRecipe(@PathVariable("id") Long id ,@RequestBody RecipeImpl recipe) {
+		System.out.println(recipe+"\n\n");
 		if (recipeService.isRecipeExist(recipe)) {
            logger.error("A Recipe with that name already exist");
             return new ResponseEntity<Recipe>( HttpStatus.CONFLICT);
         }
 		logger.info("Creating Recipe " + recipe.getName());
-		Recipe recipeView = recipeService.saveRecipe(recipe);
+		Recipe recipeView = recipeService.saveRecipe(recipe, id);
+		logger.debug(recipeView);
         return new ResponseEntity<Recipe>(recipeView, HttpStatus.CREATED);
     }
 	
-	@PutMapping(value = "recipes/updateRecipe/{id}")
+	@PutMapping(value = "/updateRecipe/{id}")
     public ResponseEntity<Recipe> updateRecipe(@PathVariable("id") Long id ,@RequestBody RecipeImpl recipe) {
 		Recipe recipeV = recipeService.findById(id);
         if (recipeV == null) {
@@ -66,7 +63,7 @@ public class RecipeController {
         return new ResponseEntity<Recipe>( HttpStatus.CREATED);
     }
     
-    @DeleteMapping(value = "recipes/deleteRecipe/{id}")
+    @DeleteMapping(value = "/deleteRecipe/{id}")
     public ResponseEntity<Recipe> deleteRecipe(@PathVariable("id") Long id) {
     	logger.info("Fetching & Deleting Recipe with id " + id);
         Recipe recipe = recipeService.findById(id);
@@ -78,7 +75,7 @@ public class RecipeController {
         return new ResponseEntity<Recipe>(HttpStatus.NO_CONTENT);
     }
     
-    @DeleteMapping(value = "recipes/deleteInstruction/{id}")
+    @DeleteMapping(value = "/deleteInstruction/{id}")
     public ResponseEntity<?> deleteInstruction(@PathVariable("id") Long id) {
     	logger.info("Fetching & Deleting Recipe instructions with id " + id);
         Recipe recipe = recipeService.findById(id);
@@ -90,7 +87,7 @@ public class RecipeController {
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 	
-    @PutMapping(value = "recipes/addInstruction/{id}")
+    @PutMapping(value = "/addInstruction/{id}")
     public ResponseEntity<Recipe> addInstruction(@PathVariable("id") Long id ,@RequestBody RecipeImpl recipe) {
     	Recipe recipeV = recipeService.findById(id);
     	logger.info("Adding instructions to recipe " + recipe.getName());

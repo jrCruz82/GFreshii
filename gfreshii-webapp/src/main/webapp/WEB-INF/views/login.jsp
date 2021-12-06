@@ -7,7 +7,7 @@
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 
 
-<title>Grocery List Home Page</title>
+<title>Grocery List login Page</title>
 
 </head>
 <body>
@@ -22,9 +22,6 @@
 					<li class="nav-item active"> 
 						<a class="nav-link " href="home">Home</a>
 					</li>
-					<li class="nav-item active"> 
-						<a class="nav-link " href="login">Login</a>
-					</li>
 				</ul>
 			</div>
 		</nav>
@@ -32,22 +29,10 @@
 	<main>
 		<div class="p-3 text-center bg-light">
 		    <h1 class="mb-3">Welcome to GFreshii</h1>
-		    <h4 class="mb-3">Enter your user information to get started</h4>
+		    <h4 class="mb-3">Enter your user information to login</h4>
 		  </div>
-  			<form action="/GFreshii/user/createUser" name="myForm" class="form-horizontal" method="post">
-   			<div class="form-row justify-content-center">
-   			    <div class="form-group col-md-4">
-			      <label for="inputName">First Name</label>
-			      <input type="text" name="firstName" class="form-control" id="inputName" placeholder="First Name" required>
-				</div>
-			</div>
-			<div class="form-row justify-content-center">
-			    <div class="form-group col-md-4">
-			      <label for="inputLastName">Last Name</label>
-			      <input type="text" name="lastName" class="form-control" id="inputLastName" placeholder="Last Name" required>
-			    </div>
-			</div>
-			  <div class="form-row justify-content-center">
+  			<form action="/GFreshii/user/login" name="myForm" class="form-horizontal" method="post">
+   			  <div class="form-row justify-content-center">
 			  	<div class="form-group col-md-4">
 			    <label for="inputUserName">UserName</label>
 			    <input type="text" name="userName" class="form-control" id="inputUserName" placeholder="UserName" required>
@@ -57,19 +42,12 @@
 			  	<div class="form-group col-md-4">
 			    <label for="inputPassword">Password</label>
 			    <input type="password" name="password" class="form-control" id="inputPassword" placeholder="Password" required>
-			  	</div>
-			  </div>
-			  <div class="form-row justify-content-center">
-			  	<div class="form-group col-md-4">
-			    <label for="inputEmail">Email</label>
-			    <input type="email" name="email" class="form-control" id="inputEmail" placeholder="Email" required>
 			  </div>
 			  </div>
 			  <div class="form-row justify-content-center">
-			    <button type="submit" class="btn btn-primary">Sign up</button>
+			    <button type="submit" class="btn btn-primary">Sign in</button>
 			  </div>
 		</form>
-		
 	</main>
 	
 

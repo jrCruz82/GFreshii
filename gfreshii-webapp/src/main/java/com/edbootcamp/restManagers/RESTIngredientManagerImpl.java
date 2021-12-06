@@ -14,7 +14,7 @@ import com.edbootcamp.api.manager.IngredientManager;
 @RestController
 public class RESTIngredientManagerImpl implements IngredientManager{
 
-	private final String REQUEST_URI = "http://localhost:8080/GFreshiiBackend/recipes";
+	private final String REQUEST_URI = "http://localhost:8080/GFreshiiBackend/user/recipes";
 	@Autowired
 	private RestTemplate restTemplate;
 	

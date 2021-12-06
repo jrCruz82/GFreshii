@@ -7,8 +7,8 @@ import com.edbootcamp.api.entity.Recipe;
 public interface RecipeService {
 
 
-	List<Recipe> fetchAllRecipes();
-	Recipe saveRecipe(Recipe recipe);
+	List<Recipe> fetchAllRecipes(Long id);
+	Recipe saveRecipe(Recipe recipe, Long id);
 	
 	Boolean isRecipeExist(Recipe recipe);
 	Recipe findById(Long id);

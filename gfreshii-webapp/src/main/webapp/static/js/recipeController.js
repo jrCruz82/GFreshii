@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('RecipeListApp').controller('recipeController', ['$scope', '$log','recipeService', function($scope,  $log, recipeService) {
+angular.module('RecipeListApp').controller('recipeController', ['$scope', '$log','recipeService' , function($scope,  $log, recipeService) {
 
 	var self = this;
 	self.currentRecipe = {ingredients:[]};
@@ -17,14 +17,24 @@ angular.module('RecipeListApp').controller('recipeController', ['$scope', '$log'
 		document.getElementById("rname").focus();
 	}
 	
+	self.user = angular.element('#user').innerHTML;
+	self.user = user.innerHTML.split(",");
+	self.user.id = self.user[0].substring(self.user[0].lastIndexOf("=")+1);
+	self.user.firstName = self.user[1].substring(self.user[1].lastIndexOf("=")+1);
+	self.user.lastName = self.user[2].substring(self.user[2].lastIndexOf("=")+1);
+	self.user.userName = self.user[3].substring(self.user[3].lastIndexOf("=")+1);
+	self.user.email = self.user[4].substring(self.user[4].lastIndexOf("=")+1);
 	
 	self.allRecipes = function(){
-		recipeService.allRecipes().then(function(data){
+		recipeService.allRecipes(self.user.id).then(function(data){
 			self.recipes = data;
 		self.recipeNames = [];
 		for(let i =0;i<self.recipes.length;i++){
 			self.recipeNames.push(self.recipes[i].name);
+			
+		
 		}	
+		
 		}, function(errResponse){
 			$log.error('Error while fetching Recipes');
 		});
@@ -84,7 +94,7 @@ angular.module('RecipeListApp').controller('recipeController', ['$scope', '$log'
     }
 	
 	self.createRecipe = function(){
-		recipeService.createRecipe(self.currentRecipe).then(function(data){
+		recipeService.createRecipe(self.currentRecipe, self.user.id).then(function(data){
 			self.currentRecipe = data;
 			self.currentIndex = self.currentRecipe["id"];
 			self.allRecipes();
@@ -160,8 +170,8 @@ angular.module('RecipeListApp').controller('recipeController', ['$scope', '$log'
 			return;
 		}
 		self.recName = angular.copy(self.currentRecipe.name);
-		document.getElementById("amount").focus();
-		self.createRecipe(self.currentRecipe);
+		$log.log(self.currentRecipe);
+		self.createRecipe(self.currentRecipe, self.user.id);
 	}
 	
 	self.removeIngredient = function(index) {
