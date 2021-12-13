@@ -14,6 +14,8 @@ import org.springframework.orm.hibernate4.HibernateTemplate;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
+import com.edbootcamp.api.entity.Recipe;
+import com.edbootcamp.entity.RecipeImpl;
 import com.edbootcamp.entity.UserImpl;
 
 @Repository
@@ -38,7 +40,6 @@ public class UserDao {
 	}
 	@Transactional
 	public UserImpl saveUser(UserImpl user) {
-		
 		Long id = (Long) hibernateTemplate.save(user);
 		user.setId(id);
 		return user;
@@ -46,10 +47,9 @@ public class UserDao {
 
 	@Transactional
 	public Boolean deleteUser(UserImpl user) {
-		UserImpl userImpl = findById(user.getId());
 		Session session = sessionFactory.getCurrentSession();
 		Query query = session.createQuery("DELETE FROM UserImpl u WHERE u.id = :id");
-		query.setParameter("id", userImpl.getId());
+		query.setParameter("id", user.getId());
 		int rowDeleted = query.executeUpdate();
 		if(rowDeleted==0) {
 			return false;
@@ -59,12 +59,12 @@ public class UserDao {
 
 	@Transactional
 	public UserImpl findById(Long id) {
-		return hibernateTemplate.get(UserImpl.class, id);
-	}
-
-	@Transactional
-	public UserImpl userById(Long id) {
-		return findById(id);
+		System.out.println(id);
+		Session session = sessionFactory.getCurrentSession();
+		Query query = session.createQuery("FROM UserImpl u WHERE u.id = :id");
+		query.setParameter("id", id);
+		UserImpl userImpl = (UserImpl) query.uniqueResult();
+		return userImpl;
 	}
 
 	@Transactional
@@ -76,6 +76,7 @@ public class UserDao {
 		System.out.println(list);
 		return list;
 	}
+	@Transactional
 	public UserImpl userByUsername(String userName) {
 		Session session = sessionFactory.getCurrentSession();
 		Query query = session.createQuery("FROM UserImpl WHERE userName = :userName");
@@ -84,9 +85,8 @@ public class UserDao {
 		System.out.println(userImpl);
 		return userImpl;
 	}
-	
+	@Transactional
 	public UserImpl loginUser(UserImpl user) {
-		  // TODO Login
 		  Session session = sessionFactory.getCurrentSession();
 
 		  Query query = session.createQuery("from UserImpl where userName =:userName and password =:password");
@@ -97,4 +97,17 @@ public class UserDao {
 		  return user;
 		  
 		 }
+	@Transactional
+	public UserImpl updateUser(UserImpl user) {
+		UserImpl userImpl = hibernateTemplate.load(UserImpl.class, user.getId());
+		userImpl.setFirstName(user.getFirstName());
+		userImpl.setLastName(user.getLastName());
+		userImpl.setUserName(user.getUserName());
+		userImpl.setEmail(user.getEmail());
+		userImpl.setPassword(user.getPassword());
+		hibernateTemplate.update(userImpl);
+		return userImpl;
+
+	}
+
 }

@@ -95,9 +95,9 @@ public class UserImpl implements User{
 		this.password = password;
 	}
 	
-//	@Override
-//	public String toString() {
-//		return "UserImpl [id=" + id + ", firstName=" + firstName + ", lastName=" + lastName + ", userName=" + userName
-//				+ ", email=" + email + ", recipes=" + recipes + "]";
-//	}
+	@Override
+	public String toString() {
+		return "UserImpl [id=" + id + ", firstName=" + firstName + ", lastName=" + lastName + ", userName=" + userName
+				+ ", email=" + email + ", recipes=" + recipes + ", password=" + password;
+	}
 }

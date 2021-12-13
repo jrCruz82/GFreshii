@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testng-results skipped="0" failed="0" ignored="0" total="17" passed="17">
+  <reporter-output>
+  </reporter-output>
+  <suite name="Default suite" duration-ms="26409" started-at="2021-12-13T14:32:27Z" finished-at="2021-12-13T14:32:53Z">
+    <groups>
+    </groups>
+    <test name="Default test" duration-ms="26409" started-at="2021-12-13T14:32:27Z" finished-at="2021-12-13T14:32:53Z">
+      <class name="com.edbootcamp.seleniumtest.SeleniumTest">
+        <test-method status="PASS" signature="beforeTest()[pri:0, instance:com.edbootcamp.seleniumtest.SeleniumTest@56620197]" name="beforeTest" is-config="true" duration-ms="3652" started-at="2021-12-13T14:32:27Z" finished-at="2021-12-13T14:32:30Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- beforeTest -->
+        <test-method status="PASS" signature="openWebApp()[pri:1, instance:com.edbootcamp.seleniumtest.SeleniumTest@56620197]" name="openWebApp" duration-ms="567" started-at="2021-12-13T14:32:30Z" finished-at="2021-12-13T14:32:31Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- openWebApp -->
+        <test-method status="PASS" signature="registerNewUser()[pri:2, instance:com.edbootcamp.seleniumtest.SeleniumTest@56620197]" name="registerNewUser" duration-ms="4193" started-at="2021-12-13T14:32:31Z" finished-at="2021-12-13T14:32:35Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- registerNewUser -->
+        <test-method status="PASS" signature="goHomeAfterRegistering()[pri:3, instance:com.edbootcamp.seleniumtest.SeleniumTest@56620197]" name="goHomeAfterRegistering" duration-ms="344" started-at="2021-12-13T14:32:35Z" finished-at="2021-12-13T14:32:35Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- goHomeAfterRegistering -->
+        <test-method status="PASS" signature="login()[pri:4, instance:com.edbootcamp.seleniumtest.SeleniumTest@56620197]" name="login" duration-ms="1187" started-at="2021-12-13T14:32:35Z" finished-at="2021-12-13T14:32:36Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- login -->
+        <test-method status="PASS" signature="newRecipe()[pri:5, instance:com.edbootcamp.seleniumtest.SeleniumTest@56620197]" name="newRecipe" duration-ms="860" started-at="2021-12-13T14:32:36Z" finished-at="2021-12-13T14:32:37Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- newRecipe -->
+        <test-method status="PASS" signature="newIngredient()[pri:6, instance:com.edbootcamp.seleniumtest.SeleniumTest@56620197]" name="newIngredient" duration-ms="4289" started-at="2021-12-13T14:32:37Z" finished-at="2021-12-13T14:32:42Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- newIngredient -->
+        <test-method status="PASS" signature="newIntruction()[pri:7, instance:com.edbootcamp.seleniumtest.SeleniumTest@56620197]" name="newIntruction" duration-ms="1149" started-at="2021-12-13T14:32:42Z" finished-at="2021-12-13T14:32:43Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- newIntruction -->
+        <test-method status="PASS" signature="deleteIngredient()[pri:8, instance:com.edbootcamp.seleniumtest.SeleniumTest@56620197]" name="deleteIngredient" duration-ms="616" started-at="2021-12-13T14:32:43Z" finished-at="2021-12-13T14:32:43Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- deleteIngredient -->
+        <test-method status="PASS" signature="editIngredient()[pri:9, instance:com.edbootcamp.seleniumtest.SeleniumTest@56620197]" name="editIngredient" duration-ms="2457" started-at="2021-12-13T14:32:43Z" finished-at="2021-12-13T14:32:46Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- editIngredient -->
+        <test-method status="PASS" signature="editRecipeName()[pri:10, instance:com.edbootcamp.seleniumtest.SeleniumTest@56620197]" name="editRecipeName" duration-ms="1203" started-at="2021-12-13T14:32:46Z" finished-at="2021-12-13T14:32:47Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- editRecipeName -->
+        <test-method status="PASS" signature="deleteLastIngredient()[pri:11, instance:com.edbootcamp.seleniumtest.SeleniumTest@56620197]" name="deleteLastIngredient" duration-ms="300" started-at="2021-12-13T14:32:47Z" finished-at="2021-12-13T14:32:47Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- deleteLastIngredient -->
+        <test-method status="PASS" signature="deleteRecipe()[pri:12, instance:com.edbootcamp.seleniumtest.SeleniumTest@56620197]" name="deleteRecipe" duration-ms="308" started-at="2021-12-13T14:32:47Z" finished-at="2021-12-13T14:32:48Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- deleteRecipe -->
+        <test-method status="PASS" signature="logout()[pri:13, instance:com.edbootcamp.seleniumtest.SeleniumTest@56620197]" name="logout" duration-ms="334" started-at="2021-12-13T14:32:48Z" finished-at="2021-12-13T14:32:48Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- logout -->
+        <test-method status="PASS" signature="goHome()[pri:14, instance:com.edbootcamp.seleniumtest.SeleniumTest@56620197]" name="goHome" duration-ms="340" started-at="2021-12-13T14:32:48Z" finished-at="2021-12-13T14:32:48Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- goHome -->
+        <test-method status="PASS" signature="logBackIn()[pri:15, instance:com.edbootcamp.seleniumtest.SeleniumTest@56620197]" name="logBackIn" duration-ms="1010" started-at="2021-12-13T14:32:48Z" finished-at="2021-12-13T14:32:49Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- logBackIn -->
+        <test-method status="PASS" signature="accountSettings()[pri:16, instance:com.edbootcamp.seleniumtest.SeleniumTest@56620197]" name="accountSettings" duration-ms="1896" started-at="2021-12-13T14:32:49Z" finished-at="2021-12-13T14:32:51Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- accountSettings -->
+        <test-method status="PASS" signature="loginNewCredentials()[pri:17, instance:com.edbootcamp.seleniumtest.SeleniumTest@56620197]" name="loginNewCredentials" duration-ms="1660" started-at="2021-12-13T14:32:51Z" finished-at="2021-12-13T14:32:53Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- loginNewCredentials -->
+        <test-method status="PASS" signature="afterTest()[pri:0, instance:com.edbootcamp.seleniumtest.SeleniumTest@56620197]" name="afterTest" is-config="true" duration-ms="0" started-at="2021-12-13T14:32:53Z" finished-at="2021-12-13T14:32:53Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- afterTest -->
+      </class> <!-- com.edbootcamp.seleniumtest.SeleniumTest -->
+    </test> <!-- Default test -->
+  </suite> <!-- Default suite -->
+</testng-results>

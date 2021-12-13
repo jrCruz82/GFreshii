@@ -15,7 +15,9 @@ angular.module('RecipeListApp').factory('recipeService', ['$http','$q','$log', f
 		deleteIngredient : deleteIngredient,
 		updateIngredient : updateIngredient,
 		addInstruction : addInstruction,
-		deleteInstruction : deleteInstruction
+		deleteInstruction : deleteInstruction,
+		userEdit : userEdit,
+		userDelete : userDelete
 	};
 	
 	return factory;
@@ -160,4 +162,38 @@ angular.module('RecipeListApp').factory('recipeService', ['$http','$q','$log', f
         );
         return deferred.promise;
     }
+
+	function userEdit(id, user) {
+		$log.log(user.userName + ' in service')
+		var deferred = $q.defer();
+		$http.put(REST_SERVICE_URI + 'updateUser/' + id,user)
+			.then(
+				function(response) {
+					$log.log(response + ' in service')
+					deferred.resolve(response.data);
+				},
+				function(errResponse) {
+					$log.error('Error while updating user');
+					deferred.reject(errResponse);
+				}
+			);
+		return deferred.promise;
+	}
+	
+	function userDelete(id) {
+		$log.log(id + ' in service')
+		var deferred = $q.defer();
+		$http.delete(REST_SERVICE_URI + 'deleteUser/' + id)
+			.then(
+				function(response) {
+					$log.log(response + ' in service')
+					deferred.resolve(response.data);
+				},
+				function(errResponse) {
+					$log.error('Error while deleting user');
+					deferred.reject(errResponse);
+				}
+			);
+		return deferred.promise;
+	}
 }]);

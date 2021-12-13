@@ -38,7 +38,7 @@ public class RecipeImpl implements  Recipe {
 	@Column(name = "INSTRUCTION")
 	private String instruction;	
 	//lazy
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "recipe", cascade =CascadeType.ALL, orphanRemoval = false)
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "recipe", cascade =CascadeType.ALL, orphanRemoval = true)
 	@JsonIgnore
 	private List<IngredientImpl> ingredients;
 	
@@ -88,11 +88,11 @@ public class RecipeImpl implements  Recipe {
 		this.user = user;
 	}
 
-//	@Override
-//	public String toString() {
-//		return "RecipeImpl [id=" + id + ", name=" + name + ", instruction=" + instruction +  ", user=" + user + "]";
-//	}
-
+	@Override
+	public String toString() {
+		return "RecipeImpl [id=" + id + ", name=" + name + ", instruction=" + instruction + ", ingredients="
+				+ ingredients + ", user=" + user + "]";
+	}
 
 	
 }
