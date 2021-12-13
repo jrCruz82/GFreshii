@@ -14,8 +14,8 @@
 
 </head>
 
-<body ng-app="RecipeListApp" class="ng-cloak" ng-controller="recipeController as ctrl">
-	
+<body ng-app="RecipeListApp" class="ng-cloak" ng-controller="recipeController as ctrl"> 
+ 
 	<nav class="navbar navbar-expand-lg navbar-dark bg-dark ">
 		<a class="navbar-brand" href="#">GFreshii App</a>
 		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
@@ -23,12 +23,6 @@
 		</button>
 		<div class="collapse navbar-collapse" id="navbarNavDropdown">
 			<ul class="navbar-nav">
-				<li class="nav-item active"> 
-					<a class="nav-link " href="home">Home</a>
-				</li>
-				<li class="nav-item active">
-					<a class="nav-link " href="recipe">Recipes</a>
-				</li>
 				<li class="nav-item active">
 					<a class="nav-link " href="groceries">Grocery List</a>
 				</li>
@@ -40,6 +34,10 @@
 			    </li>
 			    <li class="nav-item active">
 					<a class="nav-link " href="/GFreshii/login">Logout</a>
+				</li>
+				<li class="nav-item active">
+					<a class="nav-link" href="/GFreshii/user/account">Account</a>
+					
 				</li>
 			</ul>
 		</div>
@@ -59,13 +57,13 @@
                           <div class="form-group col-md-12 " >
                               <label ng-hide="ctrl.recName" class="col-md-2 control-lable " for="rname">Recipe Name</label>
                               <div ng-hide="!ctrl.recName">
-								<button type="button" class="btn btn-primary" ng-click="ctrl.resetRecipe()" >Create New Recipe</button>
-								<button type="button" class="btn btn-danger" ng-click="ctrl.removeRecipe()" >Delete Recipe</button>
-								<button type="button" class="btn btn-secondary" ng-click="ctrl.updateRecipeName()" >Edit Recipe Name</button>
+								<button type="button" id="createNewRecipe" class="btn btn-primary" ng-click="ctrl.resetRecipe()" >Create New Recipe</button>
+								<button type="button" id="deleteRecipe"  class="btn btn-danger" ng-click="ctrl.removeRecipe()" >Delete Recipe</button>
+								<button type="button" id="editRecipename" class="btn btn-secondary" ng-click="ctrl.updateRecipeName()" >Edit Recipe Name</button>
 							  </div>
                               <div class="col-md-7 shadow-lg bg-white rounded" align="center">
                                   <input  ng-hide="ctrl.recName" type="text" ng-model="ctrl.currentRecipe.name" id="rname" class="rname form-control " placeholder="Enter recipe name" required ng-minlength="3" />
-                                  <button ng-hide="ctrl.recName" ng-click="ctrl.createCurrentRecipeName()" ng-disabled="ctrl.recName || !ctrl.currentRecipe.name" class="btn btn-primary hover-shadow">Add Name</button>
+                                  <button ng-hide="ctrl.recName" ng-click="ctrl.createCurrentRecipeName()" ng-disabled="ctrl.recName || !ctrl.currentRecipe.name" id="addName" class="btn btn-primary hover-shadow">Add Name</button>
                                   
                                   <div class="has-error" ng-show="myForm.$dirty">
                                       <span ng-show="myForm.rname.$error.required">This is a required field</span>
@@ -102,8 +100,8 @@
                               </div>
                           </div>
                           <div class="form-actions floatRight">
-                              <input type="submit" ng-click="ctrl.submitIngredient(ctrl.currentRecipe.id)" value="{{!ctrl.ingredients.id ? 'Add Ingredient' : 'Update Ingredient'}}" class="btn btn-primary btn-sm" ng-disabled="myForm.$invalid">
-                              <button type="button" ng-click="ctrl.resetForm()" class="btn btn-secondary btn-sm" ng-disabled="myForm.$pristine">Reset Form</button>
+                              <input type="submit" id="addIngredient" ng-click="ctrl.submitIngredient(ctrl.currentRecipe.id)" value="{{!ctrl.ingredients.id ? 'Add Ingredient' : 'Update Ingredient'}}" class="btn btn-primary btn-sm" ng-disabled="myForm.$invalid">
+                              <button type="button"  ng-click="ctrl.resetForm()" class="btn btn-secondary btn-sm" ng-disabled="myForm.$pristine">Reset Form</button>
                           </div>
                           
                       </div>
@@ -117,7 +115,7 @@
 									<div class="has-error" ng-show="instructions.$dirty">
 										<span ng-show="insName.instructions.$error.requiered">Must fill in instructions</span>
 									</div>
-									<button class="btn btn-primary" ng-click="ctrl.addInstructions()" ng-disabled="!ctrl.currentRecipe.name || !ctrl.currentRecipe.instruction">Submit/Edit Recipe Instructions</button>
+									<button class="btn btn-primary" id="addInstruction" ng-click="ctrl.addInstructions()" ng-disabled="!ctrl.currentRecipe.name || !ctrl.currentRecipe.instruction">Submit/Edit Recipe Instructions</button>
 									<button type="button" ng-click="ctrl.removeInstructions()" class="btn btn-danger custom-width">Delete Instructions</button>
 								</div>
 						  </div>
@@ -128,7 +126,7 @@
           <div class="panel panel-default col-md-12 ">
               <div class="panel-heading"><span class="lead">List of Ingredients </span></div>
               <div class="tablecontainer justify-content-center">
-                  <table class="table table-hover table-striped table-bordered">
+                  <table class="table table-hover table-striped table-bordered" id="ingredientTable">
                   	  <thead class="thead-dark">
                           <tr>
                               <th scope="col">Id</th>
@@ -145,8 +143,8 @@
                               <td><span ng-bind="u.unit"></span></td>
                               <td><span ng-bind="u.name"></span></td>
                               <td>
-                              <button type="button" ng-click="ctrl.edit(u.id)" class="btn btn-success custom-width">Edit</button>
-                              <button type="button" ng-click="ctrl.removeIngredient($index)" class="btn btn-danger custom-width">Remove</button>
+                              <button type="button" ng-click="ctrl.edit(u.id)" class="btn btn-success custom-width" id="ingredientEdit">Edit</button>
+                              <button type="button" ng-click="ctrl.removeIngredient($index)" class="btn btn-danger custom-width" id="ingredientDelete">Remove</button>
                               </td>
                           </tr>
                       </tbody>

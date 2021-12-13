@@ -76,7 +76,7 @@ public class UserImpl {
 	@Override
 	public String toString() {
 		return "UserImpl [id=" + id + ", firstName=" + firstName + ", lastName=" + lastName + ", userName=" + userName
-				+ ", email=" + email + ", recipes=" + recipes + "]";
+				+ ", email=" + email + ", recipes=" + recipes + ", password="+ password;
 	}
 
 	public String getPassword() {

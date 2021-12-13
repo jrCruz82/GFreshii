@@ -6,16 +6,18 @@ import com.edbootcamp.entity.RecipeImpl;
 
 public interface User {
 
-	public Long getId();
-	public void setId(Long id);
-	public String getFirstName();
-	public void setFirstName(String firstName);
-	public String getLastName();
-	public void setLastName(String lastName);
-	public String getUserName();
-	public void setUserName(String userName);
-	public String getEmail();
-	public void setEmail(String email);
-	public List<RecipeImpl> getRecipes();
-	public void setRecipes(List<RecipeImpl> recipes);
+	Long getId();
+	void setId(Long id);
+	String getFirstName();
+	void setFirstName(String firstName);
+	String getLastName();
+	void setLastName(String lastName);
+	String getUserName();
+	void setUserName(String userName);
+	String getEmail();
+	void setEmail(String email);
+	List<RecipeImpl> getRecipes();
+	void setRecipes(List<RecipeImpl> recipes);
+	String getPassword();
+	void setPassword(String password);
 }

@@ -5,7 +5,7 @@ angular.module('RecipeListApp').controller('recipeController', ['$scope', '$log'
 	var self = this;
 	self.currentRecipe = {ingredients:[]};
 	
-	
+	self.user = {id:'',firstName:'',lastName:'',userName:'',email:'',password:''};
 	self.ingredients={};
 	self.recipes = [];
 	self.isDisabled = true;
@@ -17,13 +17,14 @@ angular.module('RecipeListApp').controller('recipeController', ['$scope', '$log'
 		document.getElementById("rname").focus();
 	}
 	
-	self.user = angular.element('#user').innerHTML;
-	self.user = user.innerHTML.split(",");
-	self.user.id = self.user[0].substring(self.user[0].lastIndexOf("=")+1);
-	self.user.firstName = self.user[1].substring(self.user[1].lastIndexOf("=")+1);
-	self.user.lastName = self.user[2].substring(self.user[2].lastIndexOf("=")+1);
-	self.user.userName = self.user[3].substring(self.user[3].lastIndexOf("=")+1);
-	self.user.email = self.user[4].substring(self.user[4].lastIndexOf("=")+1);
+	self.users = angular.element('#user').innerHTML;
+	self.users = user.innerHTML.split(",");
+	self.user.id = self.users[0].substring(self.users[0].lastIndexOf("=")+1);
+	self.user.firstName = self.users[1].substring(self.users[1].lastIndexOf("=")+1);
+	self.user.lastName = self.users[2].substring(self.users[2].lastIndexOf("=")+1);
+	self.user.userName = self.users[3].substring(self.users[3].lastIndexOf("=")+1);
+	self.user.email = self.users[4].substring(self.users[4].lastIndexOf("=")+1);
+	self.user.password = self.users[6].substring(self.users[6].lastIndexOf("=")+1);
 	
 	self.allRecipes = function(){
 		recipeService.allRecipes(self.user.id).then(function(data){
@@ -266,4 +267,35 @@ angular.module('RecipeListApp').controller('recipeController', ['$scope', '$log'
 	self.resetForm = function(){
 		self.ingredients = {};
 	}
+	
+	self.editUser = function(){
+		self.enabledEdit = true;
+		
+	}
+	
+	self.userEdit = function(){
+		self.enabledEdit = false;
+		recipeService.userEdit(self.user.id, self.user).then(function(data){
+			$log.log(data);
+			$log.log(' return data from editing user');
+			self.user = data;
+		},
+		    function(errResponse){
+                $log.error('Error while editing user');
+            }
+        );
+	}
+	
+	self.userDelete = function(){
+		recipeService.userDelete(self.user.id).then(function(data){
+			$log.log(data);
+			$log.log(' return data from deleting user');
+
+		},
+		    function(errResponse){
+                $log.error('Error while deleting user');
+            }
+        );
+	}
+	
 }])

@@ -26,8 +26,8 @@ public class UserService {
 		return dao.deleteUser(user);
 	}
 
-	public UserImpl userById(Long id) {
-		return dao.userById(id);
+	public UserImpl findById(Long id) {
+		return dao.findById(id);
 	}
 
 	public List<UserImpl> getAllUsers() {
@@ -39,7 +39,10 @@ public class UserService {
 	}
 
 	public UserImpl loginUser(UserImpl user) {
-		  // TODO Auto-generated method stub
 		  return dao.loginUser(user);
 		 }
+
+	public UserImpl updateUser(UserImpl user) {
+		return dao.updateUser(user);
+	}
 }

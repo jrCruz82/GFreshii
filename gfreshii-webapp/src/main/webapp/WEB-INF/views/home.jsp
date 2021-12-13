@@ -66,7 +66,7 @@
 			  </div>
 			  </div>
 			  <div class="form-row justify-content-center">
-			    <button type="submit" class="btn btn-primary">Sign up</button>
+			    <button type="submit" id="register" class="btn btn-primary">Sign up</button>
 			  </div>
 		</form>
 		
